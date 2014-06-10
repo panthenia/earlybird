@@ -13,8 +13,31 @@ $(document).ready(function () {
     }).bind("paste",function(){
         $(this).val($(this).val().replace(/\D|^0/g,''));
     }).css("ime-mode", "disabled");
-
+    $('.account-li-last').on('click',logout);
+    $('.account-li-first').on('click', function () {
+        window.location.href = 'edit.jsp';
+    });
 });
+function logout() {
+    $.ajax({
+        url: '/logout.do',
+        type: 'POST',
+        data: '',
+        dataType: 'json',
+        async: false,
+        success: function(msg, status) {
+            var err = msg.err;
+            if (typeof(err) == 'undefined' || err == '') {
+                window.location.href = '../../login.html';
+            } else {
+                alert(err);
+            }
+        },
+        error: function(jqXHR, status, err) {
+            alert(err);
+        }
+    });
+}
 function group_bypeople() {
     var clzid = $(this).attr('clzid');
     var crsid = $(this).attr('crsid');

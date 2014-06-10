@@ -47,7 +47,7 @@
 </p>
 
 <div class="header">
-    <div class="header-nav">
+    <div class="header-nav fn-clear">
         <ul>
             <li class="hn-1">
                 <span class="header-title"><img src="css/image/headr-title.png"></span> <span><img
@@ -59,12 +59,44 @@
             <li onclick="window.location.href='town.jsp'">Teachers Town</li>
         </ul>
     </div>
-    <div class="header-sign">
-        <a><%=username%>
+    <div class="town-header-sign fn-clear">
+        <a>
+            <%=username%>
         </a>
 
-        <div><img src="css/image/user.png"></div>
+        <div>
+            <a class="account-user">
+                <img src="../css/image/user.png">
+            </a>
+
+            <div class="account-list">
+                <img src="../css/image/sanjx.jpg"/>
+                <ul>
+                    <li class="account-li-first">
+                        Profile Settings
+                    </li>
+                    <li class="account-li-last">
+                        Logout
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div>
+            <img src="../css/image/infonm.png"/>
+            <a>
+                <div class="whatnm">
+                    5
+                </div>
+            </a>
+        </div>
+        <div>
+            <a>
+                <img src="../css/image/tools.png"/>
+            </a>
+        </div>
     </div>
+
 </div>
 <div class="page-border"></div>
 <div class="content">

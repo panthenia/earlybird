@@ -1,23 +1,23 @@
-    <%@ page contentType="text/html; charset=utf-8" language="java" %>
-        <%@ page import="com.atm.model.User"%>
-        <%@ page import="com.atm.util.Utils"%>
-        <%@ page import="com.atm.model.Semester"%>
+<%@ page contentType="text/html; charset=utf-8" language="java" %>
+<%@ page import="com.atm.model.User" %>
+<%@ page import="com.atm.util.Utils" %>
+<%@ page import="com.atm.model.Semester" %>
 
-            <%
-User cu = Utils.getCurUser(request);
-if (cu.getId() == null || cu.getId() == 0) {
-request.setAttribute("msg", Utils.ERR_PLEASELOGIN);
-request.getRequestDispatcher("/error.jsp").forward(request, response);
-return;
+<%
+    User cu = Utils.getCurUser(request);
+    if (cu.getId() == null || cu.getId() == 0) {
+        request.setAttribute("msg", Utils.ERR_PLEASELOGIN);
+        request.getRequestDispatcher("/error.jsp").forward(request, response);
+        return;
 
-}
-String username = cu.getName();
-if (username.equals("")) {
-username = cu.getAcc();
-}
+    }
+    String username = cu.getName();
+    if (username.equals("")) {
+        username = cu.getAcc();
+    }
 %>
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -30,7 +30,7 @@ username = cu.getAcc();
 </head>
 <body>
 <div class="header">
-    <div class="header-nav">
+    <div class="header-nav fn-clear">
         <ul>
             <li class="hn-1">
                 <span class="header-title"><img src="css/image/headr-title.png"></span> <span><img
@@ -42,13 +42,46 @@ username = cu.getAcc();
             <li onclick="window.location.href='town.jsp'">Teachers Town</li>
         </ul>
     </div>
-    <div class="header-sign">
-        <a><%=username%></a>
+    <div class="town-header-sign fn-clear">
+        <a>
+            <%=username%>
+        </a>
 
-        <div><img src="css/image/user.png"></div>
+        <div>
+            <a class="account-user">
+                <img src="../css/image/user.png">
+            </a>
+
+            <div class="account-list">
+                <img src="../css/image/sanjx.jpg"/>
+                <ul>
+                    <li class="account-li-first">
+                        Profile Settings
+                    </li>
+                    <li class="account-li-last">
+                        Logout
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div>
+            <img src="../css/image/infonm.png"/>
+            <a>
+                <div class="whatnm">
+                    5
+                </div>
+            </a>
+        </div>
+        <div>
+            <a>
+                <img src="../css/image/tools.png"/>
+            </a>
+        </div>
     </div>
+
 </div>
-        <div class="page-border"></div>
+<div class="page-border"></div>
 <!-- main -->
 <div class="main">
     <div class="main_atm">

@@ -1,20 +1,20 @@
-    <%@ page contentType="text/html; charset=utf-8" language="java" %>
-        <%@ page import="com.atm.model.User"%>
-        <%@ page import="com.atm.util.Utils"%>
-        <%@ page import="com.atm.model.Semester"%>
+<%@ page contentType="text/html; charset=utf-8" language="java" %>
+<%@ page import="com.atm.model.User" %>
+<%@ page import="com.atm.util.Utils" %>
+<%@ page import="com.atm.model.Semester" %>
 
-            <%
-User cu = Utils.getCurUser(request);
-if (cu.getId() == null || cu.getId() == 0) {
-request.setAttribute("msg", Utils.ERR_PLEASELOGIN);
-request.getRequestDispatcher("/error.jsp").forward(request, response);
-return;
+<%
+    User cu = Utils.getCurUser(request);
+    if (cu.getId() == null || cu.getId() == 0) {
+        request.setAttribute("msg", Utils.ERR_PLEASELOGIN);
+        request.getRequestDispatcher("/error.jsp").forward(request, response);
+        return;
 
-}
-String username = cu.getName();
-if (username.equals("")) {
-username = cu.getAcc();
-}
+    }
+    String username = cu.getName();
+    if (username.equals("")) {
+        username = cu.getAcc();
+    }
 %>
 
         <!DOCTYPE html>
@@ -31,26 +31,59 @@ username = cu.getAcc();
         <script type="text/javascript" src="js/group.js"></script>
 	</head>
 	<body>
-        <div class="header">
-        <div class="header-nav">
-        <ul>
-        <li class="hn-1">
-        <span class="header-title"><img src="css/image/headr-title.png"></span> <span><img
-        src="css/image/c-1.png"/><img src="css/image/c-2.png"/>  </span>
-        </li>
-        <li class="hn-2" onclick="window.location.href='select.jsp'">Academic&nbsp;Time&nbsp;Management
-        <div class="tools" style="width:10px"><img src="css/image/tool.jpg"/></div>
-        </li>
-        <li onclick="window.location.href='town.jsp'">Teachers Town</li>
-        </ul>
+    <div class="header">
+        <div class="header-nav fn-clear">
+            <ul>
+                <li class="hn-1">
+                    <span class="header-title"><img src="css/image/headr-title.png"></span> <span><img
+                        src="css/image/c-1.png"/><img src="css/image/c-2.png"/>  </span>
+                </li>
+                <li class="hn-2" onclick="window.location.href='select.jsp'">Academic&nbsp;Time&nbsp;Management
+                    <div class="tools" style="width:10px"><img src="css/image/tool.jpg"/></div>
+                </li>
+                <li onclick="window.location.href='town.jsp'">Teachers Town</li>
+            </ul>
         </div>
-        <div class="header-sign">
-        <a><%=username%></a>
+        <div class="town-header-sign fn-clear">
+            <a>
+                <%=username%>
+            </a>
 
-        <div><img src="css/image/user.png"></div>
+            <div>
+                <a class="account-user">
+                    <img src="../css/image/user.png">
+                </a>
+
+                <div class="account-list">
+                    <img src="../css/image/sanjx.jpg"/>
+                    <ul>
+                        <li class="account-li-first">
+                            Profile Settings
+                        </li>
+                        <li class="account-li-last">
+                            Logout
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <img src="../css/image/infonm.png"/>
+                <a>
+                    <div class="whatnm">
+                        5
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a>
+                    <img src="../css/image/tools.png"/>
+                </a>
+            </div>
         </div>
-        </div>
-        <div class="page-border"></div>
+
+    </div>
+    <div class="page-border"></div>
 <!-- main -->
 <div class="main">
 <img src="css/image/line.jpg" width="693" height="1" style="display:block;">
@@ -61,7 +94,7 @@ username = cu.getAcc();
 <span class="group_span3">GROUP</span>
 <span class="group_span4">分组方式</span>
 </div>
-<input type="button" value="按人数" class="btn_03" >
+<input type="button" value="players in a team" class="btn_03" >
 <div class="group_right" style="display:none">
 <span class="group_span5">输入人数</span>
 <input name="" type="text" class="text_01">

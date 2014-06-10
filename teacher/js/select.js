@@ -3,7 +3,32 @@
  */
 $(document).ready(function () {
     init_courses();
+    $('.account-li-last').on('click',logout);
+    $('.account-li-first').on('click', function () {
+        window.location.href = 'edit.jsp';
+    });
 });
+
+function logout() {
+    $.ajax({
+        url: '/logout.do',
+        type: 'POST',
+        data: '',
+        dataType: 'json',
+        async: false,
+        success: function(msg, status) {
+            var err = msg.err;
+            if (typeof(err) == 'undefined' || err == '') {
+                window.location.href = '../../login.html';
+            } else {
+                alert(err);
+            }
+        },
+        error: function(jqXHR, status, err) {
+            alert(err);
+        }
+    });
+}
 function start_score() {
     window.location.href = 'group.jsp'+"?crsid="+$(this).attr('crsid')+"&clzid="+$(this).attr('clzid')+"&name="+$(this).attr('clzname')+"&grade="+$(this).attr('clzgrade');
 }
@@ -38,6 +63,7 @@ function init_courses() {
                             var c_c = class_model.clone();
                             c_c.find('.group-img-title').find('h1').text(classes[ci].crsname);
                             c_c.find('.group-img-title').find('p').text(classes[ci].semname);
+                            c_c.find('.select-group-child-img').find('img').attr('src',classes[ci].thumb);
                             c_c.find('.select-group-child-button').attr('clzid',classes[ci].clzid);
                             c_c.find('.select-group-child-button').attr('crsid',classes[ci].crsid);
                             c_c.find('.select-group-child-button').attr('clzname',classes[ci].crsname);

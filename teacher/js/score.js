@@ -9,8 +9,31 @@ $(document).ready(function () {
     $('a.start').on('click',start_count);
     $('a.stop').on('click',stop_count);
     $('a.clear').on('click',fresh_count);
-
+    $('.account-li-last').on('click',logout);
+    $('.account-li-first').on('click', function () {
+        window.location.href = 'edit.jsp';
+    });
 });
+function logout() {
+    $.ajax({
+        url: '/logout.do',
+        type: 'POST',
+        data: '',
+        dataType: 'json',
+        async: false,
+        success: function(msg, status) {
+            var err = msg.err;
+            if (typeof(err) == 'undefined' || err == '') {
+                window.location.href = '../../login.html';
+            } else {
+                alert(err);
+            }
+        },
+        error: function(jqXHR, status, err) {
+            alert(err);
+        }
+    });
+}
 var se, m = 0, s = 1;
 var gnum ;
 function count_time() {

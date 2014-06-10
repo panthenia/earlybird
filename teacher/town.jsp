@@ -195,7 +195,7 @@ String b = request.getParameter("b");
             <div class="account-list">
                 <img src="../css/image/sanjx.jpg"/>
                 <ul>
-                    <li>
+                    <li class="account-li-first">
                         Profile Settings
                     </li>
                     <li class="account-li-last">

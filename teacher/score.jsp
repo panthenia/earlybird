@@ -1,26 +1,26 @@
-    <%@ page contentType="text/html; charset=utf-8" language="java" %>
-        <%@ page import="com.atm.model.User"%>
-        <%@ page import="com.atm.util.Utils"%>
-        <%@ page import="com.atm.model.Semester"%>
+<%@ page contentType="text/html; charset=utf-8" language="java" %>
+<%@ page import="com.atm.model.User" %>
+<%@ page import="com.atm.util.Utils" %>
+<%@ page import="com.atm.model.Semester" %>
 
-            <%
-User cu = Utils.getCurUser(request);
-Semester sm = Utils.getCurSem(request);
-if (cu.getId() == null || cu.getId() == 0) {
-request.setAttribute("msg", Utils.ERR_PLEASELOGIN);
-request.getRequestDispatcher("/error.jsp").forward(request, response);
-return;
-}
-int semid;
-if(sm == null)
-    semid = 0;
-else semid = sm.getId();
-String username = cu.getName();
-if (username.equals("")) {
-username = cu.getAcc();
-}
+<%
+    User cu = Utils.getCurUser(request);
+    Semester sm = Utils.getCurSem(request);
+    if (cu.getId() == null || cu.getId() == 0) {
+        request.setAttribute("msg", Utils.ERR_PLEASELOGIN);
+        request.getRequestDispatcher("/error.jsp").forward(request, response);
+        return;
+    }
+    int semid;
+    if (sm == null)
+        semid = 0;
+    else semid = sm.getId();
+    String username = cu.getName();
+    if (username.equals("")) {
+        username = cu.getAcc();
+    }
 %>
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
@@ -33,42 +33,91 @@ username = cu.getAcc();
     <script type="text/javascript" src="js/score.js"></script>
 </head>
 <body>
-        <p id="gnum" style="display:none"><%=request.getParameter("gnum")%></p>
-        <p id="crsid" style="display:none"><%=request.getParameter("crsid")%></p>
-        <p id="clzid" style="display:none"><%=request.getParameter("clzid")%></p>
-        <p id="userid" style="display:none"><%= cu.getId() %></p>
-        <p id="semid" style="display:none"><%=semid%></p>
-        <p id="userphoto" style="display:none"><%=cu.getPhoto()%></p>
-        <p id="schid" style="display:none"><%=cu.getSchid()%></p>
-        <div class="header">
-        <div class="header-nav">
-        <ul>
-        <li class="hn-1">
-        <span class="header-title"><img src="css/image/headr-title.png"></span> <span><img
-        src="css/image/c-1.png"/><img src="css/image/c-2.png"/>  </span>
-        </li>
-        <li class="hn-2" onclick="window.location.href='select.jsp'">Academic&nbsp;Time&nbsp;Management
-        <div class="tools" style="width:10px"><img src="css/image/tool.jpg"/></div>
-        </li>
-        <li onclick="window.location.href='town.jsp'">Teachers Town</li>
-        </ul>
-        </div>
-        <div class="header-sign">
-        <a><%=username%></a>
+<p id="gnum" style="display:none"><%=request.getParameter("gnum")%>
+</p>
 
-        <div><img src="css/image/user.png"></div>
+<p id="crsid" style="display:none"><%=request.getParameter("crsid")%>
+</p>
+
+<p id="clzid" style="display:none"><%=request.getParameter("clzid")%>
+</p>
+
+<p id="userid" style="display:none"><%= cu.getId() %>
+</p>
+
+<p id="semid" style="display:none"><%=semid%>
+</p>
+
+<p id="userphoto" style="display:none"><%=cu.getPhoto()%>
+</p>
+
+<p id="schid" style="display:none"><%=cu.getSchid()%>
+</p>
+
+<div class="header">
+    <div class="header-nav fn-clear">
+        <ul>
+            <li class="hn-1">
+                <span class="header-title"><img src="css/image/headr-title.png"></span> <span><img
+                    src="css/image/c-1.png"/><img src="css/image/c-2.png"/>  </span>
+            </li>
+            <li class="hn-2" onclick="window.location.href='select.jsp'">Academic&nbsp;Time&nbsp;Management
+                <div class="tools" style="width:10px"><img src="css/image/tool.jpg"/></div>
+            </li>
+            <li onclick="window.location.href='town.jsp'">Teachers Town</li>
+        </ul>
+    </div>
+    <div class="town-header-sign fn-clear">
+        <a>
+            <%=username%>
+        </a>
+
+        <div>
+            <a class="account-user">
+                <img src="../css/image/user.png">
+            </a>
+
+            <div class="account-list">
+                <img src="../css/image/sanjx.jpg"/>
+                <ul>
+                    <li class="account-li-first">
+                        Profile Settings
+                    </li>
+                    <li class="account-li-last">
+                        Logout
+                    </li>
+
+                </ul>
+            </div>
         </div>
+        <div>
+            <img src="../css/image/infonm.png"/>
+            <a>
+                <div class="whatnm">
+                    5
+                </div>
+            </a>
         </div>
+        <div>
+            <a>
+                <img src="../css/image/tools.png"/>
+            </a>
+        </div>
+    </div>
+
+</div>
 <div class="page-border"></div>
 <div class="container">
     <div class="container-left fn-clear">
         <div class="classname">
-            <h1><%=request.getParameter("clzname")%></h1>
+            <h1><%=request.getParameter("clzname")%>
+            </h1>
 
-            <p><%=request.getParameter("grade")%></p>
+            <p><%=request.getParameter("grade")%>
+            </p>
         </div>
         <div class="timeout">
-        <div class="group-br"></div>
+            <div class="group-br"></div>
             <div class="timeshow fn-clear" id="timeshow">
                 00:00
             </div>

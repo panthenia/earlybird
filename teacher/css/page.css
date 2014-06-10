@@ -176,17 +176,17 @@
 }
 
 .btn_03 {
-    width: 230px;
+    width: 260px;
     height: 70px;
     background: url(image/btn_02.jpg) no-repeat;
-    background-size: 230px 70px;
+    background-size: 260px 70px;
     border: none;
     cursor: pointer;
     text-align: center;
     line-height: 45px;
     margin-left: 80px;
     margin-top: 70px;
-    font-size: 30px;
+    font-size: 27px;
     color: #FFFFFF;
     font-family: "微软雅黑";
 }
