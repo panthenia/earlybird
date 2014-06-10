@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.FeedbackGradeMapper">
+
+  <cache />
+
+  <select id="list" resultType="FeedbackGrade">
+    select feedbackgrade.*,
+           question.descpt
+      from feedbackgrade
+           left join feedback
+                  on feedback.id = fbid
+           left join question
+                  on question.qpid = feedback.qpid
+                 and question.num = feedbackgrade.qnum
+     where feedbackgrade.fbid = #{fbid}
+  order by feedbackgrade.qnum
+  </select>
+
+  <insert id="insert">
+    insert
+      into feedbackgrade (fbid, qnum)
+    select #{fbid}, question.num
+      from question
+     where question.qpid = #{qpid}
+  </insert>
+
+  <update id="update" parameterType="FeedbackGrade">
+    update feedbackgrade
+       set feedbackgrade.grade = #{grade}
+     where feedbackgrade.fbid = #{fbid}
+       and feedbackgrade.qnum = #{qnum}
+  </update>
+
+  <delete id="delete">
+    delete
+      from feedbackgrade
+     where feedbackgrade.fbid = #{fbid}
+  </delete>
+
+  <select id="summary" resultType="FeedbackSummary">
+    select feedbackgrade.grade as grade,
+      <choose>
+        <when test="qnum">
+           question.num as qnum,
+           question.descpt as qdescpt,
+        </when>
+        <otherwise>
+           0 as qnum,
+           'Average' as qdescpt,
+        </otherwise>
+      </choose>
+           count(*) as count
+      from feedbackgrade
+           left join feedback
+                  on feedback.id = feedbackgrade.fbid
+           left join question
+                  on question.qpid = feedback.qpid
+                 and question.num = feedbackgrade.qnum
+           left join regcourse
+                  on regcourse.id = feedback.rcid
+                 and regcourse.avail = 1
+     where regcourse.semid = #{semid}
+       and regcourse.schid = #{schid}
+      <if test="crsid != null">
+       and regcourse.crsid = #{crsid}
+      </if>
+      <if test="clzid != null">
+       and regcourse.clzid = #{clzid}
+      </if>
+      <if test="teaid != null">
+       and regcourse.teaid = #{teaid}
+      </if>
+  group by
+      <if test="qnum">
+           feedbackgrade.qnum,
+      </if>
+           feedbackgrade.grade
+  order by
+      <if test="qnum">
+           feedbackgrade.qnum,
+      </if>
+           feedbackgrade.grade
+  </select>
+
+</mapper>

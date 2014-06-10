@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.EventMapper">
+
+  <cache />
+
+  <select id="get" resultType="Event">
+    select event.*,
+           user.name as username,
+           user.photo as userphoto
+      from event
+           left join user
+                  on user.id = event.userid
+     where event.id = #{id}
+     limit 0, 1
+  </select>
+
+  <select id="list" resultType="Event">
+    select event.*,
+           user.name as username,
+           user.photo as userphoto
+      from event
+           left join user
+                  on user.id = event.userid
+    <trim prefix="where" prefixOverrides="and">
+         <if test="userid != null">
+       and event.userid = #{userid}
+         </if>
+    </trim>
+  order by event.id desc
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+
+  <insert id="insert" parameterType="Event" useGeneratedKeys="true" keyProperty="id">
+    insert
+      into event
+       set event.userid = #{userid},
+      <if test="title != null">
+           event.title = #{title},
+      </if>
+      <if test="msg != null">
+           event.msg = #{msg},
+      </if>
+      <if test="emax != null">
+           event.emax = #{emax},
+      </if>
+      <if test="elocation != null">
+           event.elocation = #{elocation},
+      </if>
+      <if test="etime != null">
+           event.etime = #{etime},
+      </if>
+      <if test="location != null">
+           event.location = #{location},
+      </if>
+           event.uptime = now()
+  </insert>
+
+  <update id="update" parameterType="Event">
+    update event
+       set
+      <if test="title != null">
+           event.title = #{title},
+      </if>
+      <if test="msg != null">
+           event.msg = #{msg},
+      </if>
+      <if test="emax != null">
+           event.emax = #{emax},
+      </if>
+      <if test="elocation != null">
+           event.elocation = #{elocation},
+      </if>
+      <if test="etime != null">
+           event.etime = #{etime},
+      </if>
+      <if test="location != null">
+           event.location = #{location},
+      </if>
+           event.uptime = now()
+     where event.id = #{id}
+  </update>
+
+  <delete id="delete">
+    delete
+      from event
+     where event.id = #{id}
+  </delete>
+
+</mapper>

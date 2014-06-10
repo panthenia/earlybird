@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.FeedbackMapper">
+
+  <cache />
+
+  <select id="get" resultType="Feedback">
+    select feedback.*
+      from feedback
+     where feedback.id = #{id}
+     limit 0, 1
+  </select>
+  
+  <select id="list" resultType="Feedback">
+    select feedback.*,
+           user.acc as stuacc,
+           user.num as stunum,
+           user.name as stuname,
+           user.nameen as stunameen,
+           user.photo as stuphoto
+      from feedback
+           left join user
+                  on user.id = feedback.stuid
+     where feedback.rcid = #{rcid}
+  order by user.num
+  </select>
+
+  <select id="listWithStu" resultType="Feedback">
+    select feedback.*,
+           course.name as crsname,
+           clazz.name as clzname,
+           user.name as teaname
+      from feedback
+           left join regcourse
+                  on regcourse.id = feedback.rcid
+           left join course
+                  on course.id = regcourse.crsid
+           left join clazz
+                  on clazz.id = regcourse.clzid
+           left join user
+                  on user.id = regcourse.teaid
+     where feedback.stuid = #{stuid}
+       and regcourse.semid = #{semid}
+  order by regcourse.id
+  </select>
+  
+  <insert id="insert" parameterType="Feedback" useGeneratedKeys="true" keyProperty="id">
+    insert
+      into feedback
+       set feedback.stuid = #{stuid},
+           feedback.rcid = #{rcid},
+      <if test="descpt != null">
+           feedback.descpt = #{descpt},
+      </if>
+           feedback.qpid = #{qpid}
+  </insert>
+
+  <update id="update" parameterType="Feedback">
+    update feedback
+       set
+      <if test="published != null">
+           feedback.published = #{published},
+      </if>
+      <if test="descpt != null">
+           feedback.descpt = #{descpt},
+      </if>
+           feedback.id = feedback.id
+     where feedback.id = #{id}
+       and feedback.published = 0
+  </update>
+
+  <delete id="delete">
+    delete
+      from feedback
+     where feedback.id = #{id}
+  </delete>
+
+  <update id="publish">
+    update feedback
+       set feedback.published = 1
+     where feedback.id = #{id}
+  </update>
+
+  <insert id="create">
+    insert
+      into feedback (rcid, stuid, qpid)
+    select regcourse.id, user.id, #{qpid}
+      from regcourse
+           join user
+             on user.clzid = regcourse.clzid
+            and user.utype = 4
+     where regcourse.semid = #{semid}
+       and regcourse.schid = #{schid}
+      <if test="teaid != null">
+       and regcourse.teaid = #{teaid}
+      </if>
+      <if test="clzid != null">
+       and regcourse.clzid = #{clzid}
+      </if>
+      <if test="crsid != null">
+       and regcourse.crsid = #{crsid}
+      </if>
+  order by regcourse.id, user.id
+        on duplicate key
+    update feedback.qpid = #{qpid},
+           feedback.published = 0
+  </insert>
+
+  <insert id="createGrade">
+    insert ignore
+      into feedbackgrade (fbid, qnum)
+    select feedback.id, question.num
+      from regcourse
+           join feedback
+             on feedback.rcid = regcourse.id
+           join question
+             on question.qpid = feedback.qpid
+     where regcourse.semid = #{semid}
+       and regcourse.schid = #{schid}
+      <if test="teaid != null">
+       and regcourse.teaid = #{teaid}
+      </if>
+      <if test="clzid != null">
+       and regcourse.clzid = #{clzid}
+      </if>
+      <if test="crsid != null">
+       and regcourse.crsid = #{crsid}
+      </if>
+  </insert>
+
+  <delete id="tailGrade">
+    delete
+      from feedbackgrade
+     where feedbackgrade.qnum not in (
+           select question.num
+             from feedback
+                  join question
+                    on question.qpid = feedback.qpid
+            where feedback.id = feedbackgrade.fbid )
+  </delete>
+
+  <update id="setRcStatus">
+    update regcourse
+       set regcourse.status = 2
+     where regcourse.semid = #{semid}
+       and regcourse.schid = #{schid}
+      <if test="teaid != null">
+       and regcourse.teaid = #{teaid}
+      </if>
+      <if test="clzid != null">
+       and regcourse.clzid = #{clzid}
+      </if>
+      <if test="crsid != null">
+       and regcourse.crsid = #{crsid}
+      </if>
+  </update>
+
+</mapper>

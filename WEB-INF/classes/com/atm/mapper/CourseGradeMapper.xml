@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.CourseGradeMapper">
+
+  <cache />
+
+  <select id="get" resultType="CourseGrade">
+    select coursegrade.*,
+           user.acc as stuacc,
+           user.num as stunum,
+           user.name as stuname,
+           user.nameen as stunameen,
+           user.photo as stuphoto
+      from coursegrade
+           left join user
+                  on user.id = coursegrade.stuid
+     where coursegrade.id = #{id}
+     limit 0, 1
+  </select>
+
+  <select id="getByRcidAndStuid" resultType="CourseGrade">
+    select coursegrade.*
+      from coursegrade
+     where coursegrade.rcid = #{rcid}
+       and coursegrade.stuid = #{stuid}
+     limit 0, 1
+  </select>
+
+  <select id="list" resultType="CourseGrade">
+    select coursegrade.*,
+           user.acc as stuacc,
+           user.num as stunum,
+           user.name as stuname,
+           user.nameen as stunameen,
+           user.photo as stuphoto
+      from coursegrade
+           left join user
+                  on user.id = coursegrade.stuid
+     where coursegrade.rcid = #{rcid}
+  order by user.num
+  </select>
+
+  <select id="listWithStu" resultType="CourseGrade">
+    select coursegrade.*,
+           course.name as crsname,
+           clazz.name as clzname,
+           user.name as teaname
+      from coursegrade
+           left join regcourse
+                  on regcourse.id = coursegrade.rcid
+           left join course
+                  on course.id = regcourse.crsid
+           left join clazz
+                  on clazz.id = regcourse.clzid
+           left join user
+                  on user.id = regcourse.teaid
+     where coursegrade.stuid = #{stuid}
+       and regcourse.semid = #{semid}
+  order by regcourse.id
+  </select>
+  
+  <insert id="insert" parameterType="CourseGrade" useGeneratedKeys="true" keyProperty="id">
+    insert ignore
+      into coursegrade
+    <trim prefix="set" suffixOverrides=",">
+           coursegrade.stuid = #{stuid},
+           coursegrade.rcid = #{rcid},
+      <if test="absences != null">
+           coursegrade.absences = #{absences},
+      </if>
+      <if test="quiz != null">
+           coursegrade.quiz = #{quiz},
+      </if>
+      <if test="middle != null">
+           coursegrade.middle = #{middle},
+      </if>
+      <if test="final != null">
+           coursegrade.final = #{final},
+      </if>
+      <if test="remark != null">
+           coursegrade.remark = #{remark},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="CourseGrade">
+    update coursegrade
+           left join regcourse
+                  on regcourse.id = coursegrade.rcid
+           left join course
+                  on course.id = regcourse.crsid
+    <trim prefix="set" suffixOverrides=",">
+      <if test="absences != null">
+           coursegrade.absences = #{absences},
+      </if>
+<!--
+           coursegrade.tg = if(coursegrade.absences &gt; course.absenceslim, 0,
+                                ifnull((select avg(teamgrade.grade*20)
+                                          from teamgrade
+                                         where teamgrade.cgid = coursegrade.id), 0)),
+-->
+           coursegrade.tg = ifnull((select avg(teamgrade.grade*20)
+                                      from teamgrade
+                                     where teamgrade.cgid = coursegrade.id), 0),
+      <choose>
+         <when test="quiz == null">
+           coursegrade.quiz = ifnull((select avg(quizgrade.grade)
+                                        from quizgrade
+                                       where quizgrade.cgid=coursegrade.id), 0),
+         </when>
+         <otherwise>
+           coursegrade.quiz = #{quiz},
+         </otherwise>
+      </choose>
+           coursegrade.perf = if(coursegrade.absences &gt; course.absenceslim, 0,
+                                (coursegrade.tg*course.tgper
+                               + coursegrade.quiz*course.quizper)/(course.tgper + course.quizper)),
+      <if test="middle != null">
+           coursegrade.middle = #{middle},
+      </if>
+      <if test="final != null">
+           coursegrade.final = #{final},
+      </if>
+<!--
+           coursegrade.total = (coursegrade.tg*course.tgper
+                              + coursegrade.quiz*course.quizper
+                              + coursegrade.middle*course.middleper
+                              + coursegrade.final*course.finalper)/100,
+-->
+           coursegrade.total = (coursegrade.perf*(course.tgper + course.quizper)
+                              + coursegrade.middle*course.middleper
+                              + coursegrade.final*course.finalper)/100,
+      <if test="remark != null">
+           coursegrade.remark = #{remark},
+      </if>
+    </trim>
+     where coursegrade.id = #{id}
+      <if test="stuid != null">
+       and coursegrade.stuid = #{stuid}
+      </if>
+      <if test="rcid != null">
+       and coursegrade.rcid = #{rcid}
+      </if>
+  </update>
+
+  <delete id="delete">
+    delete
+      from coursegrade
+     where coursegrade.id = #{id}
+  </delete>
+
+  <insert id="create">
+    insert ignore
+      into coursegrade (rcid, stuid)
+    select regcourse.id, user.id
+      from regcourse
+           join user
+             on user.clzid = regcourse.clzid
+            and user.utype = 4
+     where regcourse.semid = #{semid}
+       and regcourse.schid = #{schid}
+       and regcourse.status in (0,1)
+  order by regcourse.id, user.id
+  </insert>
+
+  <update id="setRcStatus">
+    update regcourse
+       set regcourse.status = 1
+     where regcourse.semid = #{semid}
+       and regcourse.schid = #{schid}
+  </update>
+
+  <select id="countRemark" resultType="Integer">
+    select count(*)
+      from coursegrade
+     where coursegrade.rcid = #{rcid}
+       and coursegrade.total &lt; 60
+       and coursegrade.remark = ''
+  </select>
+
+</mapper>

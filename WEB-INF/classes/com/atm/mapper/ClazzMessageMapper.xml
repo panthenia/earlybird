@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.ClazzMessageMapper">
+
+  <cache />
+
+  <select id="list" resultType="ClazzMessage">
+    select clzmessage.*
+      from clzmessage
+           left join user
+                  on user.id = #{recverid}
+     where clzmessage.id > ifnull(user.lastp2pmsgid, 0)
+       and ((user.utype = 1)
+        or  (user.utype = 2
+       and   clzmessage.recverid in (
+                 select clazz.id
+                   from clazz
+                  where clazz.schid = user.schid
+                    and clazz.avail = 1))
+        or  (user.utype = 3
+       and   clzmessage.recverid in (
+                 select regcourse.clzid
+                   from regcourse
+                  where regcourse.teaid = user.id
+                    and regcourse.avail = 1))
+        or  (user.utype = 4
+       and   clzmessage.recverid = user.clzid))
+       and clzmessage.uptime > now() -interval 7 day
+     order by clzmessage.id desc
+  </select>
+
+  <insert id="insert" parameterType="ClazzMessage">
+    insert
+      into clzmessage
+       set clzmessage.senderid = #{senderid},
+           clzmessage.recverid = #{recverid},
+           clzmessage.msg = #{msg},
+           clzmessage.uptime = now()
+  </insert>
+
+  <update id="updateLastClzMsgid">
+    update user
+       set user.lastp2pmsgid = ifnull((select max(clzmessage.id) from clzmessage), 0)
+     where user.id = #{recverid}
+  </update>
+  
+</mapper>

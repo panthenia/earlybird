@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.ClazzMapper">
+
+  <cache />
+
+  <select id="get" resultType="Clazz">
+    select clazz.*
+      from clazz
+     where clazz.id = #{id}
+       and clazz.avail = 1
+     limit 0, 1
+  </select>
+
+  <select id="getByCode" resultType="Clazz">
+    select clazz.*
+      from clazz
+     where clazz.code = #{code}
+       and clazz.avail = 1
+     limit 0, 1
+  </select>
+
+  <select id="list" resultType="Clazz">
+    select clazz.*
+      from clazz
+     where clazz.schid = #{schid}
+       and clazz.avail = 1
+      <if test="graduated == null">
+       and clazz.graduated = 0
+      </if>
+  order by clazz.id
+  </select>
+
+  <insert id="insert" parameterType="Clazz">
+    insert
+      into clazz
+       set clazz.schid = #{schid},
+           clazz.name = #{name},
+           clazz.code = #{code},
+      <if test="graduated != null">
+           clazz.graduated = #{graduated},
+      </if>
+      <if test="descpt != null">
+           clazz.descpt = #{descpt},
+      </if>
+           clazz.begindate = #{begindate}
+  </insert>
+
+  <update id="update" parameterType="Clazz">
+    update clazz
+       set
+      <if test="name != null">
+           clazz.name = #{name},
+      </if>
+      <if test="graduated != null">
+           clazz.graduated = #{graduated},
+      </if>
+      <if test="descpt != null">
+           clazz.descpt = #{descpt},
+      </if>
+      <if test="begindate != null">
+           clazz.begindate = #{begindate},
+      </if>
+           clazz.id = clazz.id
+     where clazz.id = #{id}
+      <if test="schid != null">
+       and clazz.schid = #{schid}
+      </if>
+  </update>
+
+  <update id="delete">
+    update clazz
+       set clazz.avail = 0
+     where clazz.id = #{id}
+  </update>
+
+  <select id="countCode" resultType="Integer">
+    select count(*)
+      from clazz
+     where clazz.code = #{code}
+  </select>
+
+</mapper>

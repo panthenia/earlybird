@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.BlogAppendixMapper">
+
+  <cache />
+
+  <select id="get" resultType="BlogAppendix">
+    select blogappendix.*
+      from blogappendix
+     where blogappendix.id = #{id}
+     limit 0, 1
+  </select>
+  
+  <select id="list" resultType="BlogAppendix">
+    select blogappendix.*
+      from blogappendix
+     where blogappendix.blogid = #{blogid}
+  order by blogappendix.id
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+  
+  <insert id="insert"  parameterType="BlogAppendix">
+    insert
+      into blogappendix
+       set blogappendix.blogid = #{blogid},
+           blogappendix.atype = #{atype},
+           blogappendix.aname = #{aname},
+           blogappendix.apath = #{apath}
+  </insert>
+
+  <delete id="delete">
+    delete
+      from blogappendix
+     where blogappendix.id = #{id}
+  </delete>
+
+  <delete id="clear">
+    delete
+      from blogappendix
+     where blogappendix.blogid = #{blogid}
+  </delete>
+
+</mapper>

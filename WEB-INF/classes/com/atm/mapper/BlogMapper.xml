@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.BlogMapper">
+
+  <cache />
+
+  <select id="get" resultType="Blog">
+    select blog.*,
+           user.name as username,
+           user.photo as userphoto
+      from blog
+           left join user
+                  on user.id = blog.userid
+     where blog.id = #{id}
+     limit 0, 1
+  </select>
+
+  <select id="list" resultType="Blog">
+    select blog.*,
+           user.name as username,
+           user.photo as userphoto
+      from blog
+           left join user
+                  on user.id = blog.userid
+    <trim prefix="where" prefixOverrides="and">
+      <choose>
+        <when test="clzid != null">
+       and blog.clzid = #{clzid}
+          <if test="teaid != null">
+       and blog.userid = #{teaid}
+          </if>
+        </when>
+        <when test="teaid != null">
+       and blog.clzid in (
+           select regcourse.clzid
+             from regcourse
+            where regcourse.teaid = #{teaid}
+              and regcourse.avail = 1 )
+       and blog.userid = #{teaid}
+        </when>
+        <when test="schid != null">
+       and blog.clzid in (
+           select clazz.id
+             from clazz
+            where clazz.schid = #{schid}
+              and clazz.avail = 1 )
+        </when>
+        <otherwise>
+       and blog.clzid = 0
+        </otherwise>
+      </choose>
+    </trim>
+  order by blog.id desc
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+
+  <insert id="insert" parameterType="Blog" useGeneratedKeys="true" keyProperty="id">
+    insert
+      into blog
+       set blog.clzid = #{clzid},
+           blog.refid = #{refid},
+           blog.userid = #{userid},
+      <if test="title != null">
+           blog.title = #{title},
+      </if>
+      <if test="msg != null">
+           blog.msg = #{msg},
+      </if>
+      <if test="location != null">
+           blog.location = #{location},
+      </if>
+           blog.uptime = now()
+  </insert>
+
+  <update id="update" parameterType="Blog">
+    update blog
+       set
+      <if test="title != null">
+           blog.title = #{title},
+      </if>
+      <if test="msg != null">
+           blog.msg = #{msg},
+      </if>
+      <if test="location != null">
+           blog.location = #{location},
+      </if>
+           blog.uptime = now()
+     where blog.id = #{id}
+       and blog.refid = 0
+  </update>
+
+  <delete id="delete">
+    delete
+      from blog
+     where blog.id = #{id}
+  </delete>
+
+  <delete id="clear">
+    delete
+      from blog
+     where blog.id = #{id}
+        or blog.refid = #{id}
+  </delete>
+  
+</mapper>

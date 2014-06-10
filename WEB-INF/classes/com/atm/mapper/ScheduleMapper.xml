@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.ScheduleMapper">
+
+  <cache />
+
+  <select id="get" resultType="Schedule">
+    select schedule.*,
+           regcourse.semid as semid,
+           regcourse.crsid as crsid,
+           regcourse.clzid as clzid,
+           regcourse.teaid as teaid,
+           course.name as crsname,
+           course.logo as logo,
+           clazz.name as clzname,
+           user.name as teaname
+      from schedule
+           left join regcourse
+                  on regcourse.id = schedule.rcid
+           left join course
+                  on course.id = regcourse.crsid
+           left join clazz
+                  on clazz.id = regcourse.clzid
+           left join user
+                  on user.id = regcourse.teaid
+     where schedule.id = #{id}
+     limit 0, 1
+  </select>
+
+  <select id="list" parameterType="Schedule" resultType="Schedule">
+    select schedule.*,
+           regcourse.semid as semid,
+           regcourse.crsid as crsid,
+           regcourse.clzid as clzid,
+           regcourse.teaid as teaid,
+           course.name as crsname,
+           course.logo as logo,
+           clazz.name as clzname,
+           user.name as teaname
+      from schedule
+           left join regcourse
+                  on regcourse.id = schedule.rcid
+           left join course
+                  on course.id = regcourse.crsid
+           left join clazz
+                  on clazz.id = regcourse.clzid
+           left join user
+                  on user.id = regcourse.teaid
+     where schedule.semid = #{semid}
+       and schedule.schid = #{schid}
+       and regcourse.semid = #{semid}
+       and regcourse.schid = #{schid}
+      <if test="crsid != null">
+       and regcourse.crsid = #{crsid}
+      </if>
+      <if test="clzid != null">
+       and regcourse.clzid = #{clzid}
+      </if>
+      <if test="teaid != null">
+       and regcourse.teaid = #{teaid}
+      </if>
+       and regcourse.avail = 1
+  order by schedule.id
+  </select>
+
+  <insert id="insert" parameterType="Schedule">
+    insert
+      into schedule
+       set schedule.semid = #{semid},
+           schedule.schid = #{schid},
+    <trim suffixOverrides=",">
+      <if test="span != null">
+           schedule.rcid = #{rcid},
+      </if>
+      <if test="room != null">
+           schedule.room = #{room},
+      </if>
+      <if test="span != null">
+           schedule.span = #{span},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="Schedule">
+    update schedule
+       set
+      <if test="span != null">
+           schedule.rcid = #{rcid},
+      </if>
+      <if test="room != null">
+           schedule.room = #{room},
+      </if>
+      <if test="span != null">
+           schedule.span = #{span},
+      </if>
+           schedule.id = schedule.id
+     where schedule.id = #{id}
+      <if test="semid != null">
+       and schedule.semid = #{semid}
+      </if>
+      <if test="schid != null">
+       and schedule.schid = #{schid}
+      </if>
+  </update>
+
+  <delete id="delete">
+    delete
+      from schedule
+     where schedule.id = #{id}
+      <if test="semid != null">
+       and schedule.semid = #{semid}
+      </if>
+      <if test="schid != null">
+       and schedule.schid = #{schid}
+      </if>
+  </delete>
+
+</mapper>

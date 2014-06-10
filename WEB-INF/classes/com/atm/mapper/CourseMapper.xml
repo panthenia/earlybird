@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.CourseMapper">
+
+  <cache />
+
+  <select id="get" resultType="Course">
+    select course.*
+      from course
+     where course.id = #{id}
+       and course.avail = 1
+     limit 0, 1
+  </select>
+
+  <select id="list" resultType="Course">
+    select course.*
+      from course
+     where course.schid = #{schid}
+       and course.avail = 1
+  order by course.id
+  </select>
+
+  <insert id="insert" parameterType="Course" useGeneratedKeys="true" keyProperty="id">
+    insert
+      into course
+       set course.schid = #{schid},
+           course.name = #{name},
+      <if test="absenceslim != null">
+           course.absenceslim = #{absenceslim},
+      </if>
+      <if test="tgper != null">
+           course.tgper = #{tgper},
+      </if>
+      <if test="quizper != null">
+           course.quizper = #{quizper},
+      </if>
+      <if test="middleper != null">
+           course.middleper = #{middleper},
+      </if>
+      <if test="finalper != null">
+           course.finalper = #{finalper},
+      </if>
+           course.logo = #{logo}
+  </insert>
+
+  <update id="update" parameterType="Course">
+    update course
+       set
+      <if test="name != null">
+           course.name = #{name},
+      </if>
+      <if test="absenceslim != null">
+           course.absenceslim = #{absenceslim},
+      </if>
+      <if test="tgper != null">
+           course.tgper = #{tgper},
+      </if>
+      <if test="quizper != null">
+           course.quizper = #{quizper},
+      </if>
+      <if test="middleper != null">
+           course.middleper = #{middleper},
+      </if>
+      <if test="finalper != null">
+           course.finalper = #{finalper},
+      </if>
+           course.id = course.id
+     where course.id = #{id}
+      <if test="schid != null">
+       and course.schid = #{schid}
+      </if>
+  </update>
+
+  <update id="delete">
+    update course
+       set course.avail = 0
+     where course.id = #{id}
+  </update>
+
+  <update id="updateLogo">
+    update course
+       set course.logo = #{logo}
+     where course.id = #{id}
+  </update>
+  
+  <select id="listWeek" resultType="CourseWeek">
+    select courseweek.*
+      from courseweek
+     where courseweek.crsid = #{crsid}
+  order by courseweek.week
+  </select>
+
+  <insert id="insertWeek">
+    insert
+      into courseweek
+       set courseweek.crsid = #{crsid},
+           courseweek.week = #{week},
+           courseweek.name = #{name}
+  </insert>
+
+  <update id="updateWeek">
+    update courseweek
+       set courseweek.name = #{name}
+     where courseweek.crsid= #{crsid}
+       and courseweek.week = #{week}
+  </update>
+
+</mapper>

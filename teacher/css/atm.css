@@ -1,0 +1,275 @@
+@charset "utf-8";
+.container{
+	width: 1080px;
+	min-width: 980px;
+	height: auto;
+	position: relative;
+	left: 130px;
+	padding-top: 85px;
+}
+.container-left{
+	float: left;
+	width: 300px;
+	height: 500px;
+	position: relative;
+}
+.classname{
+	width: 100%;
+	height: 64px;
+	color: #34495e;
+}
+.classname h1{
+	line-height: 35px;
+	font-size: 40px;
+	font-weight: 600;
+	text-align: right;
+}
+.classname p{
+    margin-top: 5px;
+	float: right;
+	font-size: 20px;
+}
+.timeout{
+	width: 300px;
+	height: 200px;
+	margin-top: 53px;
+}
+.timeshow{
+	width: 240px;
+	height: 75px;
+	line-height: 75px;
+	font-size: 86.4px;
+	font-weight: 500;
+	border:none;
+	color: #ea565f;
+	background-color: #fff;
+	float: right;
+}
+.timeout p{
+	margin-top: 5px;
+	font-size: 21.6px;
+	color:#ea565f;
+}
+.timeout em.min{
+	margin-left: 90px;
+}
+.timeout em.sec{
+	margin-left: 80px;
+}
+.timetool{
+	position: relative;
+	left: 20px;
+	width: 160px;
+	height: 20px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+.start{
+	margin-left: 20px;
+}
+.stop{
+	margin-left: 40px;
+}
+.clear{
+	margin-left: 40px;
+}
+.container-right{
+	float: left;
+	position: relative;
+	width: 700px;
+	height: 530px;
+}
+.group{
+	width: 750px;
+	height: 275px;
+	margin-left: 25px;
+	position: relative;
+}
+.group-br{
+	width: 100%;
+	height: 1px;
+	padding-bottom: 19px;
+	background: url(image/border1.jpg) no-repeat;
+}
+.group-child{
+	width: 680px;
+	height: 250px;
+	margin:0 auto;
+	position: relative;
+}
+.group-child-child{
+	width: 170px;
+	height: 100%;
+	float: left;
+	margin-right: 50px;
+}
+.group-child-child-title{
+	height: 40px;
+	width: 100%;
+	border-bottom: 1px solid #ababab;
+	position: relative;
+}
+.group-child-child h1{
+	display: block;
+	width: 110px;
+	height: 24px;
+	line-height: 24px;
+	float: left;
+	font-size: 24px;
+	font-weight: 600;
+	color: #34495e;
+}
+.score{
+	float: left;
+	position: relative;
+	top: 10px;
+	margin-left: 10px;
+	width: 48px;
+	height: 12px;
+	line-height: 12px;
+	font-size: 14px;
+	color: #a3b0be;
+	cursor: pointer;
+}
+.score-list{
+	position: absolute;
+	width: 55px;
+	height: 150px;
+	color: #ea565f;
+	background-color: #eaeff4;
+	top: 30px;
+	left: 120px;
+	padding-top: 10px;
+	z-index: 7;
+	display: none;
+}
+.score-list ul li{
+	display: block;
+	line-height: 12px;
+	width: 100%;
+	height: 12px;
+	font-size: 14px;
+	font-weight: 600;
+	margin-bottom: 6px;
+	text-align: center;
+	cursor:pointer;
+}
+.score-list li:hover{
+	background-color: #1C5480;
+}
+.group-list{
+	position: relative;
+	padding-top: 15px;
+	height: 175px;
+	width: 100%;
+	z-index: 5;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.group-list ul{
+	position: relative;
+	left: 20px;
+}
+.group-list li{
+	list-style-image: url(image/listimg.jpg);
+	margin-bottom: 10px;
+}
+
+
+/*选择课程*/
+.content{
+	width: 774px;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 60px;	
+}
+.select-group{
+	width: 774px;
+	height: 245px;
+}
+.select-group-br{
+	width: 100%;
+	height: 1px;
+	background: url(image/border1.jpg) no-repeat;
+	padding-bottom: 29px;
+}
+.select-group-child{
+	width: 141px;
+	height: 192px;
+	position: relative;
+	float: left;
+	margin-right: 30px;
+}
+.select-group-list{
+	width: 700px;
+	margin: 0 auto;
+}
+.select-group-child-img{
+	width: 151px;
+	height: 137px;
+	position: relative;
+}
+.select-group-child-img img{
+	height: 140px;
+	position: absolute;
+	left: 9px;
+	top: 9px;
+	width: 140px;
+	z-index: 100;
+}
+.group-img-bg{
+	background: url(image/bg.png) no-repeat;
+    background-size:156px 156px;
+	height: 156px;
+	position: absolute;
+	width: 160px;
+	z-index: 103;
+	cursor: pointer;
+}
+.group-img-title {
+	position: absolute;
+	width: 160px;
+	height: 100px;
+	z-index: 102;
+	top:60px;
+	left: 0px;
+}
+.group-img-title h1{
+	font-size: 30px;
+	font-weight: 600;
+	color: #fff;
+	line-height: 30px;
+    text-align: center;
+}
+.group-img-title p{
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+}
+.select-group-child-button{
+	background-color:#ea565f;
+	padding:8px 13px;
+	position:relative;
+	left: 40px;
+	top: 30px;
+	font-size:18px;
+	font-weight: 600;
+	text-decoration: none;
+	color:#fff;
+	box-shadow: inset 0px 1px 0px #bc181c, 0px 6px 0px #bc181c;
+	border-radius: 5px;
+}
+.select-group-child-button:hover{
+	text-decoration: none;
+}
+.select-group-child-button:active {
+	color:#fff;
+	text-shadow: 0px 1px 1px rgba(255,255,255,0.3);
+	background:#bc181c;
+	box-shadow: inset 0px 1px 0px #bc181c, inset 0px -1px 0px #bc181c;
+	top:22px;
+}
+
+.select-group-child-button:active::before {
+	top:13px;
+}

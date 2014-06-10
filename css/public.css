@@ -1,0 +1,213 @@
+/*布局*/
+.header{
+	width: 100%;
+	min-width: 1260px;
+	height: 34px;
+	background-color: #34495e;
+	position: relative;
+}
+.page{
+	width: 100%;
+	min-width: 1260px;
+	height: auto;
+	overflow: hidden;
+	position: relative;
+}
+
+/*头部*/
+.header-nav{
+	height: 34px;
+	float: left;
+	font-size: 14px;
+	position: relative;
+}
+.header-nav li{
+	cursor: pointer;
+	display: block;
+	height: 28px;
+	float: left;
+	padding: 6px 25px 0 25px;
+	color: #fff;
+	text-align: center;
+}
+.header-nav li.hn-1{
+	background-color: #ea565f;
+}
+.header-nav li img{
+	margin-left: 3px;
+}
+.tools{
+	position: relative;
+	left: 225px;
+	top: -17px;
+}
+.header-title{
+	padding-left: 100px;
+}
+.header-sign{
+	float: right;
+	height: 28px;
+	padding-top: 6px;
+	width: auto;
+	color: #fff;
+	vertical-align: middle;
+	margin-right: 100px;
+	position: relative;
+}
+.header-sign a{
+    display: block;
+    float: left;
+}
+.header-sign > div{
+    position: relative;
+    float: left;
+    margin-left: 10px;
+}
+.town-header-sign{
+    float: left;
+    height: 28px;
+    padding-top: 6px;
+    width: auto;
+    color: #fff;
+    vertical-align: middle;
+    margin-left: 320px;
+    position: relative;
+}
+.town-header-sign a{
+    display: block;
+    float: left;
+}
+.town-header-sign > div{
+    position: relative;
+    float: left;
+    margin-left: 10px;
+}
+.whatnm{
+	display: block;
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	line-height: 10px;
+	text-align: center;
+	background-color: #fff;
+	color: #34495e;
+	left: 8px;
+	top: 0;
+}
+.account-list{
+	width: 163px;
+	height: 48px;
+	position: absolute;
+	background-color: #fff;
+	top: 35px;
+	left: -130px;
+	z-index: 999;
+	border-radius: 5px;
+	box-shadow: 0 0 2px #cbcbcb;
+	display: none;
+}
+.account-list img{
+	position: absolute;
+	top: -7px;
+	left: 130px;
+}
+.account-list li{
+	display: block;
+	width: 163px;
+	height: 24px;
+	line-height: 24px;
+	color: #362f2d;
+	text-align: center;
+	font-weight: 600;
+	cursor: pointer;
+}
+.account-list li:hover{
+	background:url(image/lihove.jpg) repeat;
+}
+.account-li-last{
+	border-radius: 0 0 5px 5px;
+}
+.page-border{
+	width: 100%;
+	min-width: 1260px;
+	height: 6px;
+	background: url(image/br.jpg) repeat;
+}
+.footer{
+	width: 100%;
+	height: 200px;
+}
+
+.myevent-text{
+	float: left;
+	width: 370px;
+	height: 140px;
+	word-break: break-word;
+	color: #1c5480;
+}
+.myevent-picture{
+	float: left;
+	width: 132px;
+	height: 132px;
+	overflow: hidden;
+	background-color: #1c5480;
+	margin-left: 20px;
+}
+.myevent-info{
+	width: 190px;
+	height: 47px;
+	padding-left: 10px;
+	margin-left: 5px;
+	margin-top: 160px;
+	border-left: 3px solid #ea565f;
+}
+
+.blog-tools{
+	height: 36px;
+	margin-left: 72px;
+	position: relative;
+}
+.blog-tools li{
+	float: left;
+	display: block;
+	height: 36px;
+	padding: 0 15px;
+	line-height: 36px;
+	position: relative;
+	cursor: pointer;
+}
+.blog-tools li.toolshover{
+	border: 1px solid #c6c6c6;
+	border-bottom: 1px solid #fff;
+	z-index: 88;
+	background-color: #717F8E;
+	color: #fff;
+}
+.allPeople{
+	display: none;
+}
+#selectAdate_selectYear{
+	width: 80px;
+	height: 25px;
+	line-height: 25px;
+}
+#selectAdate_selectMonth{
+	width: 50px;
+	height: 25px;
+	line-height: 25px;
+}
+#selectAdate_selectDay{
+	width: 50px;
+	height: 25px;
+	line-height: 25px;
+}
+#datetime{
+	width: 80px;
+	margin-left: 5px;
+	height: 25px;
+	line-height: 25px;
+	position: relative;
+	top: 3px;
+	
+}
+

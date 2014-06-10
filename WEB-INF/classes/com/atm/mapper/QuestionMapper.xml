@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.QuestionMapper">
+
+  <cache />
+
+  <select id="list" resultType="Question">
+    select question.*
+      from question
+     where question.qpid = #{qpid}
+  </select>
+
+  <insert id="copy">
+    insert ignore
+      into question (qpid, num, descpt)
+    select #{qpid}, num, descpt
+      from question
+     where question.qpid = #{cpqpid}
+  </insert>
+
+  <select id="count" resultType="Integer">
+    select count(*)
+      from question
+     where question.qpid = #{qpid}
+  </select>
+
+  <insert id="insert" parameterType="Question">
+    insert ignore
+      into question
+       set question.descpt = #{descpt},
+           question.qpid = #{qpid},
+           question.num = #{num}
+  </insert>
+
+  <update id="update" parameterType="Question">
+    update question
+       set question.descpt = #{descpt}
+     where question.qpid = #{qpid}
+       and question.num = #{num}
+  </update>
+
+  <delete id="tail">
+    delete
+      from question
+     where question.qpid = #{qpid}
+       and question.num > #{num}
+  </delete>
+
+</mapper>

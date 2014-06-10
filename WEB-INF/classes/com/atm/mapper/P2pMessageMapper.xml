@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.P2pMessageMapper">
+
+  <cache />
+
+  <select id="list" resultType="P2pMessage">
+    select p2pmessage.*
+      from p2pmessage
+           left join user
+                  on user.id = p2pmessage.recverid
+     where p2pmessage.id > ifnull(user.lastp2pmsgid, 0)
+       and p2pmessage.recverid = #{recverid}
+       and p2pmessage.uptime > now() -interval 1 month
+  order by p2pmessage.id desc
+  </select>
+
+  <insert id="insert" parameterType="P2pMessage">
+    insert
+      into p2pmessage
+       set p2pmessage.senderid = #{senderid},
+           p2pmessage.recverid = #{recverid},
+           p2pmessage.msg = #{msg},
+           p2pmessage.uptime = now()
+  </insert>
+
+  <update id="updateLastP2pMsgid">
+    update user
+       set user.lastp2pmsgid = ifnull((select max(p2pmessage.id) from p2pmessage), 0)
+     where user.id = #{recverid}
+  </update>
+  
+</mapper>

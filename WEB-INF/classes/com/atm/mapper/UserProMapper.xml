@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.UserProMapper">
+
+  <cache />
+
+  <select id="get" resultType="UserPro">
+    select user.*
+      from user
+     where user.id = #{id}
+       and user.utype= #{utype}
+       and user.avail = 2
+     limit 0, 1
+  </select>
+  
+  <select id="getByAcc" resultType="UserPro">
+    select user.*
+      from user
+     where user.acc = #{acc}
+     limit 0, 1
+  </select>
+  
+  <select id="list" resultType="UserPro">
+    select user.*
+      from user
+     where user.utype= #{utype}
+       and user.schid = #{schid}
+       and user.clzid = #{clzid}
+       and user.avail = 2
+  </select>
+
+  <insert id="insert" parameterType="UserPro">
+    insert
+      into user
+       set user.acc = #{acc},
+           user.pwd = #{pwd},
+           user.schid = #{schid},
+           user.clzid = #{clzid},
+      <choose>
+        <when test="name == null">
+           user.name = user.acc,
+        </when>
+        <otherwise>
+           user.name = #{name},
+        </otherwise>
+      </choose>
+      <if test="nameen != null">
+           user.nameen = #{nameen},
+      </if>
+      <if test="firstname != null">
+           user.firstname = #{firstname},
+      </if>
+      <if test="lastname != null">
+           user.lastname = #{lastname},
+      </if>
+      <if test="gender != null">
+           user.gender = #{gender},
+      </if>
+       <if test="num != null">
+           user.num = #{num},
+      </if>
+      <if test="email != null">
+           user.email = #{email},
+      </if>
+      <if test="phone != null">
+           user.phone = #{phone},
+      </if>
+      <if test="descpt != null">
+           user.descpt = #{descpt},
+      </if>
+      <if test="birth != null">
+           user.birth = #{birth},
+      </if>
+      <if test="entry != null">
+           user.entry = #{entry},
+      </if>
+      <if test="nation != null">
+           user.nation = #{nation},
+      </if>
+      <if test="ppid != null">
+           user.ppid = #{ppid},
+      </if>
+      <if test="ppvalid != null">
+           user.ppvalid = #{ppvalid},
+      </if>
+      <if test="visaid != null">
+           user.visaid = #{visaid},
+      </if>
+      <if test="visavalid != null">
+           user.visavalid = #{visavalid},
+      </if>
+      <if test="address != null">
+           user.address = #{address},
+      </if>
+      <if test="marriage != null">
+           user.marriage = #{marriage},
+      </if>
+      <if test="edu != null">
+           user.edu = #{edu},
+      </if>
+      <if test="degree != null">
+           user.degree = #{degree},
+      </if>
+      <if test="major != null">
+           user.major = #{major},
+      </if>
+      <if test="edu2 != null">
+           user.edu2 = #{edu2},
+      </if>
+      <if test="degree2 != null">
+           user.degree2 = #{degree2},
+      </if>
+      <if test="major2 != null">
+           user.major2 = #{major2},
+      </if>
+      <if test="certificate != null">
+           user.certificate = #{certificate},
+      </if>
+      <if test="position != null">
+           user.position = #{position},
+      </if>
+      <if test="ranking != null">
+           user.ranking = #{ranking},
+      </if>
+      <if test="salary != null">
+           user.salary = #{salary},
+      </if>
+      <if test="parentemail != null">
+           user.parentemail = #{parentemail},
+      </if>
+      <if test="parentphone != null">
+           user.parentphone = #{parentphone},
+      </if>
+           user.photo = #{photo},
+           user.utype = #{utype},
+           user.avail = #{avail},
+           user.uptime = now()
+  </insert>
+
+  <update id="update" parameterType="UserPro">
+    update user
+       set
+      <if test="name != null">
+           user.name = #{name},
+      </if>
+      <if test="nameen != null">
+           user.nameen = #{nameen},
+      </if>
+      <if test="firstname != null">
+           user.firstname = #{firstname},
+      </if>
+      <if test="lastname != null">
+           user.lastname = #{lastname},
+      </if>
+      <if test="gender != null">
+           user.gender = #{gender},
+      </if>
+      <if test="num != null">
+           user.num = #{num},
+      </if>
+      <if test="email != null">
+           user.email = #{email},
+      </if>
+      <if test="phone != null">
+           user.phone = #{phone},
+      </if>
+      <if test="descpt != null">
+           user.descpt = #{descpt},
+      </if>
+      <if test="birth != null">
+           user.birth = #{birth},
+      </if>
+      <if test="entry != null">
+           user.entry = #{entry},
+      </if>
+      <if test="nation != null">
+           user.nation = #{nation},
+      </if>
+      <if test="ppid != null">
+           user.ppid = #{ppid},
+      </if>
+      <if test="ppvalid != null">
+           user.ppvalid = #{ppvalid},
+      </if>
+      <if test="visaid != null">
+           user.visaid = #{visaid},
+      </if>
+      <if test="visavalid != null">
+           user.visavalid = #{visavalid},
+      </if>
+      <if test="address != null">
+           user.address = #{address},
+      </if>
+      <if test="marriage != null">
+           user.marriage = #{marriage},
+      </if>
+      <if test="edu != null">
+           user.edu = #{edu},
+      </if>
+      <if test="degree != null">
+           user.degree = #{degree},
+      </if>
+      <if test="major != null">
+           user.major = #{major},
+      </if>
+      <if test="edu2 != null">
+           user.edu2 = #{edu2},
+      </if>
+      <if test="degree2 != null">
+           user.degree2 = #{degree2},
+      </if>
+      <if test="major2 != null">
+           user.major2 = #{major2},
+      </if>
+      <if test="certificate != null">
+           user.certificate = #{certificate},
+      </if>
+      <if test="position != null">
+           user.position = #{position},
+      </if>
+      <if test="ranking != null">
+           user.ranking = #{ranking},
+      </if>
+      <if test="salary != null">
+           user.salary = #{salary},
+      </if>
+      <if test="parentemail != null">
+           user.parentemail = #{parentemail},
+      </if>
+      <if test="parentphone != null">
+           user.parentphone = #{parentphone},
+      </if>
+           user.uptime = now()
+     where user.id = #{id}
+       and user.utype = #{utype}
+       and user.schid = #{schid}
+       and user.clzid = #{clzid}
+  </update>
+
+  <update id="delete" parameterType="UserPro">
+    update user
+       set user.avail = 0,
+           user.uptime = now()
+     where user.id = #{id}
+       and user.utype = #{utype}
+       and user.schid = #{schid}
+       and user.clzid = #{clzid}
+  </update>
+
+  <update id="updatePhoto">
+    update user
+       set user.photo = #{photo},
+           user.uptime = now()
+     where user.id = #{id}
+  </update>
+
+  <update id="incCredit">
+    update user
+       set user.credit = if(user.credit > -#{inc}, user.credit+#{inc}, 0)
+     where user.id = #{id}
+       and user.utype = 3
+  </update>
+
+  <select id="getCredit" resultType="Integer">
+    select user.credit
+      from user
+     where user.id = #{id}
+  </select>
+
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.EventJoinMapper">
+
+  <cache />
+
+  <select id="list" resultType="EventJoin">
+    select eventjoin.*,
+           user.name as username,
+           user.photo as userphoto
+      from eventjoin
+           left join user
+                  on user.id = eventjoin.userid
+    <trim prefix="where" prefixOverrides="and">
+      <if test="userid != null">
+       and eventjoin.userid = #{userid}
+      </if>
+      <if test="eventid != null">
+       and eventjoin.eventid = #{eventid}
+      </if>
+    </trim>
+  order by eventjoin.eventid desc
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+
+  <select id="listEvent" resultType="Event">
+    select event.*,
+           user.name as username,
+           user.photo as userphoto
+      from event
+           left join user
+                  on user.id = event.userid
+     where event.id in (
+           select eventjoin.eventid
+             from eventjoin
+            where eventjoin.userid = #{userid} )
+  order by event.id desc
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+
+  <insert id="insert">
+    insert ignore
+      into eventjoin
+       set eventjoin.eventid = #{eventid},
+           eventjoin.userid = #{userid}
+  </insert>
+
+  <delete id="delete">
+    delete
+      from eventjoin
+    <trim prefix="where" prefixOverrides="and">
+      <if test="userid != null">
+       and eventjoin.userid = #{userid}
+      </if>
+      <if test="eventid != null">
+       and eventjoin.eventid = #{eventid}
+      </if>
+    </trim>
+  </delete>
+
+  <select id="count" resultType="Byte">
+    select count(*)
+      from eventjoin
+     where eventjoin.eventid = #{eventid}
+  </select>
+
+</mapper>

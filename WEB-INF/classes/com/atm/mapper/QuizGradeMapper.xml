@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.QuizGradeMapper">
+
+  <cache />
+
+  <select id="get" resultType="QuizGrade">
+    select quizgrade.*
+      from quizgrade
+     where quizgrade.cgid = #{cgid}
+       and quizgrade.num = #{num}
+     limit 0, 1
+  </select>
+
+  <select id="list" resultType="QuizGrade">
+    select quizgrade.*
+      from quizgrade
+     where quizgrade.cgid = #{cgid}
+  order by quizgrade.num
+  </select>
+
+  <insert id="insert" parameterType="QuizGrade">
+    insert ignore
+      into quizgrade
+       set quizgrade.cgid = #{cgid},
+           quizgrade.num = #{num},
+           quizgrade.grade = #{grade}
+  </insert>
+
+  <update id="update" parameterType="QuizGrade">
+    update quizgrade
+       set quizgrade.grade = #{grade}
+     where quizgrade.cgid = #{cgid}
+       and quizgrade.num = #{num}
+  </update>
+
+  <delete id="delete">
+    delete
+      from quizgrade
+     where quizgrade.cgid = #{cgid}
+       and quizgrade.num = #{num}
+  </delete>
+
+  <select id="getMaxNum" resultType="Integer">
+    select max(quizgrade.num)
+      from quizgrade
+     where quizgrade.cgid in (
+           select coursegrade.id
+             from coursegrade
+            where coursegrade.rcid = #{rcid} )
+  </select>
+
+  <select id="getMaxNumWithStu" resultType="Integer">
+    select max(quizgrade.num)
+      from quizgrade
+     where quizgrade.cgid in (
+           select coursegrade.id
+             from coursegrade
+                  left join regcourse
+                         on regcourse.id = coursegrade.rcid
+            where coursegrade.stuid = #{stuid}
+              and regcourse.semid = #{semid} )
+  </select>
+
+</mapper>

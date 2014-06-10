@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.MessageMapper">
+
+  <cache />
+
+  <select id="list" resultType="Message">
+    select message.*,
+           peer.name as peername,
+           peer.photo as peerphoto
+      from message
+           left join user as peer
+                  on peer.id = message.peerid
+     where message.userid = #{userid}
+       and message.mtype = #{mtype}
+  order by message.id desc
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+
+  <insert id="insert" parameterType="Message">
+    insert
+      into message
+       set message.userid = #{userid},
+           message.peerid = #{peerid},
+           message.mtype = #{mtype},
+           message.msg = #{msg},
+           message.uptime = now()
+  </insert>
+
+  <delete id="delete">
+    delete
+      from message
+     where message.id = #{id}
+       and message.userid = #{userid}
+  </delete>
+
+  <select id="countNew" resultType="Long">
+    select count(*)
+      from message
+     where message.userid = #{userid}
+       and message.mtype = 0
+       and message.flag = 0
+  </select>
+
+  <update id="setFlag">
+    update message
+       set message.flag = 1,
+           message.uptime = now()
+     where message.id = #{id}
+       and message.userid = #{userid}
+  </update>
+
+</mapper>

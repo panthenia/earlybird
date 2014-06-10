@@ -1,0 +1,195 @@
+@charset "utf-8";
+/* CSS Document */
+.main {
+    width: 693px;
+    overflow: hidden;
+    margin: 64px auto 0;
+}
+
+.main_atm {
+    width: 693px;
+    height: 262px;
+}
+
+.main_atm_r {
+    width: 378px;
+    overflow: hidden;
+    float: right;
+}
+
+.main_atm_r span {
+    display: block;
+    line-height: 55px;
+    font-size: 60px;
+    color: #34495e;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.main_atm_r samp {
+    display: block;
+    line-height: 40px;
+    font-size: 18px;
+    color: #ea565f;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.ul_atm {
+    display: block;
+    border-left: 4px solid #ea565f;
+    padding-left: 12px;
+}
+
+.ul_atm li {
+    line-height: 30px;
+}
+
+.ul_atm li p {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #717f8e;
+}
+
+.btn_01 {
+    width: 180px;
+    height: 37px;
+    background: url(image/btn_01.jpg) no-repeat;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    line-height: 37px;
+    font-size: 18px;
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+}
+
+.main_teachers {
+    height: 256px;
+    margin-top: 40px;
+}
+
+.main_teachers_left {
+    width: 280px;
+    height: 256px;
+    float: left;
+    padding-left: 110px;
+}
+
+.main_teachers_left span {
+    display: block;
+    line-height: 55px;
+    font-size: 60px;
+    color: #34495e;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.group {
+    height: 200px;
+    padding: 40px 0;
+}
+
+.group_left {
+    width: 250px;
+    overflow: hidden;
+    float: left;
+    text-align: right;
+}
+
+.group_span1 {
+    display: block;
+    line-height: 50px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #34495e;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.group_span2 {
+    display: block;
+    line-height: 30px;
+    font-size: 20px;
+    color: #34495e;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.group_span3 {
+    display: block;
+    line-height: 60px;
+    font-size: 60px;
+    font-weight: bold;
+    color: #ea565f;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.group_span4 {
+    display: block;
+    line-height: 50px;
+    font-size: 40px;
+    color: #34495e;
+    font-family: "微软雅黑";
+}
+
+.group_right {
+    width: 160px;
+    overflow: hidden;
+    float: right;
+    text-align: center;
+    margin-right: 148px;
+}
+
+.group_span5 {
+    display: block;
+    line-height: 50px;
+    font-size: 36px;
+    color: #ea565f;
+    font-family: "微软雅黑";
+}
+
+.text_01 {
+    width: 135px;
+    height: 50px;
+    border: none;
+    background: url(image/text_bg.jpg) no-repeat;
+    line-height: 50px;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    color: #333333;
+    padding-left: 5px;
+    margin-top: 10px;
+}
+
+.btn_02 {
+    width: 116px;
+    height: 52px;
+    background: url(image/btn_02.jpg) no-repeat;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    line-height: 45px;
+    font-size: 30px;
+    color: #FFFFFF;
+    font-family: "微软雅黑";
+    margin-top: 15px;
+}
+
+.btn_03 {
+    width: 230px;
+    height: 70px;
+    background: url(image/btn_02.jpg) no-repeat;
+    background-size: 230px 70px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    line-height: 45px;
+    margin-left: 80px;
+    margin-top: 70px;
+    font-size: 30px;
+    color: #FFFFFF;
+    font-family: "微软雅黑";
+}
+
+
+

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.BlogFavoriteMapper">
+
+  <cache />
+
+  <select id="list" resultType="BlogFavorite">
+    select blogfavorite.*
+      from blogfavorite
+    <trim prefix="where" prefixOverrides="and">
+      <if test="userid != null">
+       and blogfavorite.userid = #{userid}
+      </if>
+      <if test="blogid != null">
+       and blogfavorite.blogid = #{blogid}
+      </if>
+    </trim>
+  order by blogfavorite.blogid desc
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+
+  <select id="listBlog" resultType="Blog">
+    select blog.*,
+           user.name as username,
+           user.photo as userphoto
+      from blog
+           left join user
+                  on user.id = blog.userid
+     where blog.id in (
+           select blogfavorite.blogid
+             from blogfavorite
+            where blogfavorite.userid = #{userid} )
+  order by blog.id desc
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+
+  <insert id="insert">
+    insert ignore
+      into blogfavorite
+       set blogfavorite.blogid = #{blogid},
+           blogfavorite.userid = #{userid}
+  </insert>
+
+  <delete id="delete">
+    delete
+      from blogfavorite
+    <trim prefix="where" prefixOverrides="and">
+      <if test="userid != null">
+       and blogfavorite.userid = #{userid}
+      </if>
+      <if test="blogid != null">
+       and blogfavorite.blogid = #{blogid}
+      </if>
+    </trim>
+  </delete>
+
+  <delete id="clear">
+    delete
+      from blogfavorite
+     where blogfavorite.blogid = #{blogid}
+        or blogfavorite.blogid in (
+           select blog.id
+             from blog
+            where blog.refid = #{blogid} )
+  </delete>
+  
+</mapper>

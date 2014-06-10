@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.RegCourseMapper">
+
+  <cache />
+
+  <select id="get" resultType="RegCourse">
+    select regcourse.*,
+           semester.name as semname,
+           school.name as schname,
+           course.name as crsname,
+           course.logo as logo,
+           clazz.name as clzname,
+           user.name as teaname
+      from regcourse
+           left join semester
+                  on semester.id = regcourse.semid
+           left join school
+                  on school.id = regcourse.schid
+           left join course
+                  on course.id = regcourse.crsid
+           left join clazz
+                  on clazz.id = regcourse.clzid
+           left join user
+                  on user.id = regcourse.teaid
+     where regcourse.id = #{id}
+       and regcourse.avail = 1
+     limit 0, 1
+  </select>
+
+  <select id="list" parameterType="RegCourse" resultType="RegCourse">
+    select regcourse.*,
+           semester.name as semname,
+           school.name as schname,
+           course.name as crsname,
+           course.logo as logo,
+           clazz.name as clzname,
+           user.name as teaname
+      from regcourse
+           left join semester
+                  on semester.id = regcourse.semid
+           left join school
+                  on school.id = regcourse.schid
+           left join course
+                  on course.id = regcourse.crsid
+           left join clazz
+                  on clazz.id = regcourse.clzid
+           left join user
+                  on user.id = regcourse.teaid
+     where regcourse.semid = #{semid}
+       and regcourse.schid = #{schid}
+      <if test="crsid != null">
+       and regcourse.crsid = #{crsid}
+      </if>
+      <if test="clzid != null">
+       and regcourse.clzid = #{clzid}
+      </if>
+      <if test="teaid != null">
+       and regcourse.teaid = #{teaid}
+      </if>
+       and regcourse.avail = 1
+  order by regcourse.crsid,
+           regcourse.clzid
+  </select>
+
+  <insert id="insert" parameterType="RegCourse">
+    insert
+      into regcourse
+       set regcourse.semid = #{semid},
+           regcourse.schid = #{schid},
+    <trim suffixOverrides=",">
+      <if test="crsid != null">
+           regcourse.crsid = #{crsid},
+      </if>
+      <if test="clzid != null">
+           regcourse.clzid = #{clzid},
+      </if>
+      <if test="teaid != null">
+           regcourse.teaid = #{teaid},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="RegCourse">
+    update regcourse
+       set
+      <if test="crsid != null">
+           regcourse.crsid = if(regcourse.status=0, #{crsid}, regcourse.crsid),
+      </if>
+      <if test="clzid != null">
+           regcourse.clzid = if(regcourse.status=0, #{clzid}, regcourse.clzid),
+      </if>
+      <if test="teaid != null">
+           regcourse.teaid = if(regcourse.status=0, #{teaid}, regcourse.teaid),
+      </if>
+           regcourse.id = regcourse.id
+     where regcourse.id = #{id}
+      <if test="semid != null">
+       and regcourse.semid = #{semid}
+      </if>
+      <if test="schid != null">
+       and regcourse.schid = #{schid}
+      </if>
+  </update>
+
+  <update id="delete">
+    update regcourse
+       set regcourse.avail = 0
+     where regcourse.id = #{id}
+  </update>
+
+  <select id="count" resultType="Integer">
+    select count(*)
+      from regcourse
+    <trim prefix="where" prefixOverrides="and">
+      <if test="crsid != null">
+       and regcourse.crsid = #{crsid}
+      </if>
+      <if test="clzid != null">
+       and regcourse.clzid = #{clzid}
+      </if>
+      <if test="crsid != null">
+       and regcourse.teaid = #{teaid}
+      </if>
+    </trim>
+  </select>
+
+  <update id="setStatus">
+    update regcourse
+       set regcourse.status = #{status}
+     where regcourse.id = #{id}
+  </update>
+
+</mapper>

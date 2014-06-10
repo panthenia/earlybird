@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.BlogAlertMapper">
+
+  <cache />
+
+  <select id="list" resultType="BlogAlert">
+    select blogalert.*
+      from blogalert
+    <trim prefix="where" prefixOverrides="and">
+      <if test="userid != null">
+       and blogalert.userid = #{userid}
+      </if>
+      <if test="blogid != null">
+       and blogalert.blogid = #{blogid}
+      </if>
+    </trim>
+  order by blogalert.blogid desc
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+
+  <select id="listBlog" resultType="Blog">
+    select blog.*,
+           user.name as username,
+           user.photo as userphoto
+      from blog
+           left join user
+                  on user.id = blog.userid
+     where blog.id in (
+           select blogalert.blogid
+             from blogalert
+            where blogalert.userid = #{userid} )
+  order by blog.id desc
+      <if test="start != null and num != null">
+     limit #{start}, #{num}
+      </if>
+  </select>
+
+  <insert id="insert">
+    insert ignore
+      into blogalert
+       set blogalert.blogid = #{blogid},
+           blogalert.userid = #{userid}
+  </insert>
+
+  <delete id="delete">
+    delete
+      from blogalert
+    <trim prefix="where" prefixOverrides="and">
+      <if test="userid != null">
+       and blogalert.userid = #{userid}
+      </if>
+      <if test="blogid != null">
+       and blogalert.blogid = #{blogid}
+      </if>
+    </trim>
+  </delete>
+
+  <delete id="clear">
+    delete
+      from blogalert
+     where blogalert.blogid = #{blogid}
+        or blogalert.blogid in (
+           select blog.id
+             from blog
+            where blog.refid = #{blogid} )
+  </delete>
+
+  <select id="count" resultType="Long">
+    select count(*)
+      from blogalert
+     where blogalert.userid = #{userid}
+  </select>
+  
+</mapper>

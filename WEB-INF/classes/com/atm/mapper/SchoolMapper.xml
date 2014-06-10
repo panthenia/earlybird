@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atm.mapper.SchoolMapper">
+
+  <cache />
+
+  <select id="get" resultType="School">
+    select school.*
+      from school
+     where school.id = #{id}
+       and school.avail = 1
+     limit 0, 1
+  </select>
+
+  <select id="list" resultType="School">
+    select school.*
+      from school
+     where school.avail = 1
+  order by school.id
+  </select>
+
+  <insert id="insert" parameterType="School">
+    insert
+      into school
+       set school.name = #{name},
+           school.code = #{code},
+      <if test="qpid != null">
+           school.qpid = #{qpid},
+      </if>
+      <if test="descpt != null">
+           school.descpt = #{descpt},
+      </if>
+           school.logo = #{logo}
+  </insert>
+
+  <update id="update" parameterType="School">
+    update school
+       set
+      <if test="name != null">
+           school.name = #{name},
+      </if>
+      <if test="code != null">
+           school.code = #{code},
+      </if>
+      <if test="qpid != null">
+           school.qpid = #{qpid},
+      </if>
+      <if test="descpt != null">
+           school.descpt = #{descpt},
+      </if>
+           school.id = school.id
+     where school.id = #{id}
+  </update>
+
+  <update id="delete">
+    update school
+       set school.avail = 0
+     where school.id = #{id}
+  </update>
+
+  <update id="updateLogo">
+    update school
+       set school.logo = #{logo}
+     where school.id = #{id}
+  </update>
+  
+</mapper>
