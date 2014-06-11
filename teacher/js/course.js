@@ -12,9 +12,15 @@ $(document).ready(function (){
     $('#course-week-next').on('click', function () {
 
     });
+    $('#show-media').find('#close-icon').on('click',closeshowmedia);
     init_course_list();
 
 });
+function closeshowmedia(){
+    $('#show-media').hide();
+    $('#fade').hide();
+    $('#show-media').find('div.play-file').remove();
+}
 var getByteLen = function (val) {
     var len = 0;
     for (var i = 0; i < val.length; i++) {
@@ -78,9 +84,17 @@ function show_week_file() {
                     if(name_lenth > 47)
                         ff.find('strong').text(new_name+'...');
                     else ff.find('strong').text(files[i].tname);
-                    ff.find('em').attr('file-path',files[i].tpath);
-                    ff.find('em').attr('trid',files[i].id);
-                    ff.find('em').on('click',download_file);
+                    ff.find('#down').attr('file-path',files[i].tpath);
+                    ff.find('#down').attr('trid',files[i].id);
+                    ff.find('#down').on('click',download_file);
+                    ff.find('#show').attr('file-path',files[i].tpath);
+                    ff.find('#show').on('click', function () {
+
+                        $('#show-media').append('<a class="play-file" href="'+$(this).attr('file-path')+'">'+$(this).attr('file-path')+'</a>');
+                        $('#show-media').show();
+                        $('#show-media').find('a.play-file').media( { width: 400, height: 300, autoplay: true } );
+                        $('#fade').show();
+                    });
                     ff.show();
                     fc.append(ff);
                 }

@@ -138,7 +138,7 @@ function get_students(url,data,clzid) {
                     chat_panel.find('#chat-send').attr('userid',users[i].id);
                     chat_panel.find('#chat-send').on('click',send_chat);
                     chat_panel.attr('userimg',users[i].photo);
-
+                    chat_panel.hide();
 
                     sm.show();
                     sm.on('click',init_chat);

@@ -1,6 +1,4 @@
-/**
- * Created by p on 2014/6/10.
- */
+
 function isNumber(str) {
     var regu = /^\d+$/;
     return regu.test(str);

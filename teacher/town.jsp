@@ -40,6 +40,7 @@ String b = request.getParameter("b");
     <script type="text/javascript" src="../js/jquery.datetimepicker.js"></script>
     <script type="text/javascript" src="../js/jquery.emoticons.js"></script>
     <script type="text/javascript" src="../js/jquery.form.js"></script>
+    <script type="text/javascript" src="js/jquery.media.js"></script>
     <script type="text/javascript" src="../js/jquery.dateSelector.js"></script>
     <script type="text/javascript" src="../js/jquery-ui-1.10.4.custom.js"></script>
     <script type="text/javascript" src="js/event.js"></script>
@@ -56,6 +57,13 @@ String b = request.getParameter("b");
 
 <p id="schid" style="display:none"><%=cu.getSchid()%></p>
 
+<div class="showmedia" id="show-media">
+    <a
+       class="cloaeac"
+            id="close-icon">
+        <img src="../css/image/shoutdown.png">
+    </a>
+</div>
 <div class="addevents" id="light">
     <a href="javascript:void(0)"
        onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"
@@ -342,7 +350,7 @@ String b = request.getParameter("b");
             <a id="myb-pre" style="position:absolute;">Previous</a>
             <a id="myb-next" style="margin-left:550px">Next</a>
         </div>
-        <div class="feed fn-clear" id="newblog-1">
+        <div class="feed fn-clear" id="newblog-1" style="display: none">
             <div class="userimg">
                 <img src="../img/userlogo.jpg">
             </div>
@@ -428,7 +436,7 @@ String b = request.getParameter("b");
             <a id="apb-pre" style="position:absolute;">Previous</a>
             <a id="apb-next" style="margin-left:550px;">Next</a>
         </div>
-        <div class="feed fn-clear" id="newblog-1">
+        <div class="feed fn-clear" id="newblog-1" style="display: none">
             <div class="userimg">
                 <img src="../img/userlogo.jpg">
             </div>
@@ -567,7 +575,7 @@ String b = request.getParameter("b");
                 </div>
                 <div class="courses-list-detail">
                     <ul id="course-ul">
-                        <li>
+                        <li style="display: none">
                             <div class="courses-img">
                                 <img src="../css/image/eyes.jpg" style="width:35px"/>
                             </div>
@@ -693,9 +701,13 @@ String b = request.getParameter("b");
                                 <p id="file-item-model">
                                     <img src="../css/image/wj.jpg" class="wj-img-s"/>
                                     <strong>english builder lesson 1. pdf</strong>
-                                    <em>
+                                    <em id="down">
                                         <img src="../css/image/wj-download%20.jpg">
                                         Download
+                                    </em>
+                                    <em id="show">
+                                        <img src="../css/image/eye.jpg">
+                                       Show
                                     </em>
                                 </p>
 
@@ -778,7 +790,7 @@ String b = request.getParameter("b");
             </table>
         </div>
     </div>
-    <div class="chatMainPanel" id="chat-main-panel">
+    <div class="chatMainPanel" id="chat-main-panel" style="display: none">
         <div class="chatTitle">
             <div class="chatNameWrap">
                 <p id="messagePanelTitle" class="messageName">ABCD</p>
@@ -864,7 +876,7 @@ String b = request.getParameter("b");
                 +add
             </a>
         </div>
-        <div class="events-1 ev fn-clear" id="event_model">
+        <div class="events-1 ev fn-clear" id="event_model" style="display: none">
             <div class="events-who fn-clear">
                 <img src="../img/userlogo.jpg"/>
             </div>

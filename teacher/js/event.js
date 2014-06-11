@@ -200,6 +200,7 @@ function handle_event(url,data){
                         event_start -= event_step;
                         alert('no next page!');
                     }
+                    $('.events').find('#event_model').hide();
                     return;
                 }
 

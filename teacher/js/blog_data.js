@@ -423,6 +423,7 @@ function handle_blog(url,blog_box){
                             my_blog_start -= blog_step;
                             alert('no next page!');
                         }
+                        $(blog_box).find('#newblog-1').hide();
                         return;
                     }
                 }else {
@@ -432,6 +433,7 @@ function handle_blog(url,blog_box){
                             ap_blog_start -= blog_step;
                             alert('no next page!');
                         }
+                        $(blog_box).find('#newblog-1').hide();
                         return;
                     }
                 }

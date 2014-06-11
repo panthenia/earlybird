@@ -122,7 +122,11 @@
                 00:00
             </div>
             <p><em class="min">min</em><em class="sec">sec</em></p>
-
+            <div class="choose-time">
+                set time:
+                <select ></select>
+                (minute)
+            </div>
             <div class="timetool">
                 <a class="start"><img src="css/image/start.jpg"></a>
                 <a class="stop"><img src="css/image/stop.jpg"/> </a>

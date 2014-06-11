@@ -6,6 +6,9 @@ $(document).ready(function () {
     gnum = parseInt($('#gnum').text());
     init_groups();
 
+    for(var i=1;i<=60;++i){
+        $('.choose-time').find('select').append('<option value="'+i+'">'+i+'</option>');
+    }
     $('a.start').on('click',start_count);
     $('a.stop').on('click',stop_count);
     $('a.clear').on('click',fresh_count);
@@ -34,21 +37,32 @@ function logout() {
         }
     });
 }
-var se, m = 0, s = 1;
+var se = null, m = 0, s = 1;
 var gnum ;
 function count_time() {
-    if (s > 0 && (s % 60) == 0) { m += 1; s = 0; }
+    if(m == 0 && s == 0){
+        clearInterval(se);
+        $('#timeshow').text('00:00');
+        alert('time over!');
+
+        return;
+    }
+    if (s == 0) { m -= 1; s = 59; }
 
     t = (m <= 9 ? "0" + m : m) + ":" + (s <= 9 ? "0" + s : s);
     $('#timeshow').text(t);
-    s += 1;
+    s -= 1;
 
 }
 function start_count() {
     $(this).attr("disabled", true);
 
+    if(se != null)
+        return;
+    m=$('.choose-time').find('select').val()-1;
+    s=59;
+
     se = setInterval(count_time, 1000);
-    $('#timeshow').text('00:01');
 }
 function stop_count() {
     clearInterval(se);

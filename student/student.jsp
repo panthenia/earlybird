@@ -297,7 +297,7 @@ String b = request.getParameter("b");
                 <a id="myb-pre" style="position:absolute;">Previous</a>
                 <a id="myb-next" style="margin-left:520px">Next</a>
             </div>
-            <div class="feed fn-clear" id="newblog-1">
+            <div class="feed fn-clear" id="newblog-1" style="display: none">
                 <div class="userimg">
                     <img src="../img/userlogo.jpg">
                 </div>
@@ -384,7 +384,7 @@ String b = request.getParameter("b");
                 <a id="apb-pre" style="position:absolute;">Previous</a>
                 <a id="apb-next" style="margin-left:520px">Next</a>
             </div>
-            <div class="feed fn-clear" id="newblog-1">
+            <div class="feed fn-clear" id="newblog-1" style="display: none">
                 <div class="userimg">
                     <img src="../img/userlogo.jpg">
                 </div>
@@ -568,7 +568,7 @@ String b = request.getParameter("b");
     </div>
     <div class="favorite-list-detail">
     <ul id="feed-back-list">
-    <li id="fb-old-model">
+    <li id="fb-old-model" style="display: none">
     <div class="favorite-name question-name">
     Q 2ORAL 3
     </div>
@@ -582,7 +582,7 @@ String b = request.getParameter("b");
     </a>
     </div>
     </li>
-    <li id="fb-new-model">
+    <li id="fb-new-model" style="display: none">
     <div class="favorite-name question-name">
     Q 3Writing
     </div>
@@ -737,7 +737,7 @@ String b = request.getParameter("b");
             </table>
         </div>
     </div>
-    <div class="chatMainPanel" id="chat-main-panel">
+    <div class="chatMainPanel" id="chat-main-panel" style="display: none">
         <div class="chatTitle">
             <div class="chatNameWrap">
                 <p id="messagePanelTitle" class="messageName">ABCD</p>
@@ -892,7 +892,7 @@ String b = request.getParameter("b");
             </a>
         </div>
 
-        <div class="events-1 ev fn-clear" id="event_model">
+        <div class="events-1 ev fn-clear" id="event_model" style="display: none">
             <div class="events-who fn-clear">
                 <img src="../img/userlogo.jpg"/>
             </div>

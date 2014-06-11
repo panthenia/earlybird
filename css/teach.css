@@ -1337,7 +1337,7 @@ float: left;
 	
 }
 /*弹出的添加内容*/
-.addevents, .showevents{
+.addevents, .showevents,.showmedia{
 	padding-top: 30px;
 	padding-left: 25px;
 	display: none;
