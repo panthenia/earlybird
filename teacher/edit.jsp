@@ -20,143 +20,86 @@
 <!-- saved from url=(0057)http://www.teachertown.cn/supervisor/teacheredit.jsp?id=3 -->
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>ATM</title>
-    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="js/jquery.form.js"></script>
-    <script type="text/javascript" src="js/comm.js"></script>
-    <script type="text/javascript" src="js/common.js"></script>
-    <link rel="stylesheet" href="css/base.css" type="text/css" media="all">
-    <link rel="stylesheet" href="css/main.css" type="text/css" media="all">
-    <link rel="stylesheet" href="../css/public.css"/>
-    <link rel="stylesheet" href="../css/teach.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ATM</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.form.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<link rel="stylesheet" href="css/base.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/main.css" type="text/css" media="all">
+<link rel="stylesheet" href="../css/public.css"/>
+<link rel="stylesheet" href="../css/teach.css">
 
-    <script>
-        jQuery(function () {
-            $(document).ready(function () {
-                initHtml();
-                $('#upload-image').on('change',change_photo);
-            });
-
-            $('.account-li-last').on('click', logout);
-            $('.account-li-first').on('click', function () {
-                window.location.href = 'edit.jsp';
-            });
-            function change_photo() {
-                //alert($(this).val());
-                var form = $('#photo-form');
-                if ($(this).val() == '') {
-                    return;
-                }
-
-                form.ajaxForm({
-                    url: '/api/photo/upload.do',
-                    dataType: 'json',
-                    success: function(msg, status) {
-                        var err = msg.err;
-                        if (typeof(err) == 'undefined' || err == '') {
-                            //alert(msg.img);
-                            $('#ifbar_photo').attr('src',msg.img);
-                        } else {
-                            alert(err);
-                        }
-                    },
-                    error: function (jqXHR, status, err) {
-                        alert(err);
-                    }
-                });
-
-                form.submit();
-            }
-            function logout() {
-                $.ajax({
-                    url: '/logout.do',
-                    type: 'POST',
-                    data: '',
-                    dataType: 'json',
-                    async: false,
-                    success: function (msg, status) {
-                        var err = msg.err;
-                        if (typeof(err) == 'undefined' || err == '') {
-                            window.location.href = '../../login.html';
-                        } else {
-                            alert(err);
-                        }
-                    },
-                    error: function (jqXHR, status, err) {
-                        alert(err);
-                    }
-                });
-            }
-
-            $('#btn_save').click(function () {
-                $('#if_name').val($('#if_firstname').val() + ' ' + $('#if_lastname').val());
-
-
-                var url_to = '/api/user/edit.do';
-
-                var data_to = 'utype=3&id=<%=cu.getId()%>&schid=<%=cu.getSchid()%>&clzid=<%=cu.getClzid()%>&' + $(this).closest('form').serialize();
-                //alert(data_to);
-                $.ajax({
-                    url: url_to,
-                    type: 'POST',
-                    data: data_to,
-                    dataType: 'json',
-                    async: false,
-                    success: function (msg, status) {
-                        var err = msg.err;
-                        if (typeof(err) == 'undefined' || err == '') {
-
-                            alert('success!');
-
-
-                        } else {
-                            alert(err);
-                        }
-                    },
-                    error: function (jqXHR, status, err) {
-                        alert(err);
-                    }
-                });
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/photo/cut.do',
-                    data: 'img='+$('#ifbar_photo').attr('src'),
-                    dataType: 'json',
-                    context: this,
-
-                    success: function(msg, status) {
-                        var err = msg.err;
-                        if (typeof(err) == 'undefined' || err == '') {
-
-                        } else {
-                            alert(err);
-                        }
-                    },
-                    error: function(jqXHR, status, err) {
-                        alert(err);
-                    }
-                });
-            });
-
-            $('#btn_cancel').click(function () {
-
-                history.back();
-
-            });
+<script>
+    jQuery(function () {
+        var changed_photo = false;
+        $(document).ready(function () {
+            initHtml();
+            $('#upload-image').on('change', change_photo);
         });
 
-        function initHtml() {
+        $('.account-li-last').on('click', logout);
+        $('.account-li-first').on('click', function () {
+            window.location.href = 'edit.jsp';
+        });
+        function change_photo() {
+            //alert($(this).val());
+            var form = $('#photo-form');
+            if ($(this).val() == '') {
+                return;
+            }
 
-            initTeacher();
+            form.ajaxForm({
+                url: '/api/photo/upload.do',
+                dataType: 'json',
+                success: function (msg, status) {
+                    var err = msg.err;
+                    if (typeof(err) == 'undefined' || err == '') {
+                        //alert(msg.img);
+                        $('#ifbar_photo').attr('src', msg.img);
+                        changed_photo = true;
+                    } else {
+                        alert(err);
+                    }
+                },
+                error: function (jqXHR, status, err) {
+                    alert(err);
+                }
+            });
 
+            form.submit();
         }
 
-        function initTeacher() {
+        function logout() {
+            $.ajax({
+                url: '/logout.do',
+                type: 'POST',
+                data: '',
+                dataType: 'json',
+                async: false,
+                success: function (msg, status) {
+                    var err = msg.err;
+                    if (typeof(err) == 'undefined' || err == '') {
+                        window.location.href = '../../login.html';
+                    } else {
+                        alert(err);
+                    }
+                },
+                error: function (jqXHR, status, err) {
+                    alert(err);
+                }
+            });
+        }
 
-            var url_to = '/api/user/info.do';
-            var data_to = 'utype=3&id=' +<%=cu.getId()%>;
+        $('#btn_save').click(function () {
+            $('#if_name').val($('#if_firstname').val() + ' ' + $('#if_lastname').val());
 
+
+            var url_to = '/api/user/edit.do';
+
+            var data_to = 'utype=3&id=<%=cu.getId()%>&schid=<%=cu.getSchid()%>&clzid=<%=cu.getClzid()%>&' + $(this).closest('form').serialize();
+            //alert(data_to);
             $.ajax({
                 url: url_to,
                 type: 'POST',
@@ -166,60 +109,122 @@
                 success: function (msg, status) {
                     var err = msg.err;
                     if (typeof(err) == 'undefined' || err == '') {
-                        var user = msg.user;
-                        $('#ifbar_photo').attr('src', user.thumb);
-                        $('#ifbar_name').text(user.name);
 
-                        $('#if_gender').val(user.gender);
-                        $('#if_firstname').val(user.firstname);
-                        $('#if_lastname').val(user.lastname);
-                        $('#if_acc').val(user.acc);
-                        $('#if_email').val(user.email);
+                        alert('success!');
 
-                        $('#if_marriage').val(user.marriage);
-                        if (typeof(user.birth) != 'undefined' && user.birth != '1970-01-01') {
-                            $('#if_birth').val(user.birth);
-                        }
 
-                        $('#if_ppid').val(user.ppid);
-
-                        if (typeof(user.ppvalid) != 'undefined' && user.ppvalid != '1970-01-01') {
-                            $('#if_ppvalid').val(user.ppvalid);
-                        }
-
-                        $('#if_visaid').val(user.visaid);
-
-                        if (typeof(user.visavalid) != 'undefined' && user.visavalid != '1970-01-01') {
-                            $('#if_visavalid').val(user.visavalid);
-                        }
-
-                        $('#if_phone').val(user.phone);
-                        $('#if_parentphone').val(user.parentphone);
-                        $('#if_address').val(user.address);
-
-                        $('#if_edu').val(user.edu);
-                        $('#if_degree').val(user.degree);
-                        $('#if_major').val(user.major);
-                        $('#if_edu2').val(user.edu2);
-                        $('#if_degree2').val(user.degree2);
-                        $('#if_major2').val(user.major2);
-                        $('#if_certificate').val(user.certificate);
-                        $('#if_position').val(user.position);
-                        $('#if_ranking').val(user.ranking);
                     } else {
-                        //alert(err);
+                        alert(err);
                     }
-
-                    $('.i_select').iSimulateSelect({'width': 0});
                 },
                 error: function (jqXHR, status, err) {
-                    //alert(err);
+                    alert(err);
                 }
             });
+            if (changed_photo == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/photo/cut.do',
+                    data: 'img=' + $('#ifbar_photo').attr('src'),
+                    dataType: 'json',
+                    context: this,
 
-        }
-    </script>
-    <style type="text/css"></style>
+                    success: function (msg, status) {
+                        var err = msg.err;
+                        if (typeof(err) == 'undefined' || err == '') {
+                            changed_photo = false;
+                        } else {
+                            alert(err);
+                        }
+                    },
+                    error: function (jqXHR, status, err) {
+                        alert(err);
+                    }
+                });
+            }
+        });
+
+        $('#btn_cancel').click(function () {
+
+            history.back();
+
+        });
+    });
+
+    function initHtml() {
+
+        initTeacher();
+
+    }
+
+    function initTeacher() {
+
+        var url_to = '/api/user/info.do';
+        var data_to = 'utype=3&id=' +<%=cu.getId()%>;
+
+        $.ajax({
+            url: url_to,
+            type: 'POST',
+            data: data_to,
+            dataType: 'json',
+            async: false,
+            success: function (msg, status) {
+                var err = msg.err;
+                if (typeof(err) == 'undefined' || err == '') {
+                    var user = msg.user;
+                    $('#ifbar_photo').attr('src', user.thumb);
+                    $('#ifbar_name').text(user.name);
+
+                    $('#if_gender').val(user.gender);
+                    $('#if_firstname').val(user.firstname);
+                    $('#if_lastname').val(user.lastname);
+                    $('#if_acc').val(user.acc);
+                    $('#if_email').val(user.email);
+
+                    $('#if_marriage').val(user.marriage);
+                    if (typeof(user.birth) != 'undefined' && user.birth != '1970-01-01') {
+                        $('#if_birth').val(user.birth);
+                    }
+
+                    $('#if_ppid').val(user.ppid);
+
+                    if (typeof(user.ppvalid) != 'undefined' && user.ppvalid != '1970-01-01') {
+                        $('#if_ppvalid').val(user.ppvalid);
+                    }
+
+                    $('#if_visaid').val(user.visaid);
+
+                    if (typeof(user.visavalid) != 'undefined' && user.visavalid != '1970-01-01') {
+                        $('#if_visavalid').val(user.visavalid);
+                    }
+
+                    $('#if_phone').val(user.phone);
+                    $('#if_parentphone').val(user.parentphone);
+                    $('#if_address').val(user.address);
+
+                    $('#if_edu').val(user.edu);
+                    $('#if_degree').val(user.degree);
+                    $('#if_major').val(user.major);
+                    $('#if_edu2').val(user.edu2);
+                    $('#if_degree2').val(user.degree2);
+                    $('#if_major2').val(user.major2);
+                    $('#if_certificate').val(user.certificate);
+                    $('#if_position').val(user.position);
+                    $('#if_ranking').val(user.ranking);
+                } else {
+                    //alert(err);
+                }
+
+                $('.i_select').iSimulateSelect({'width': 0});
+            },
+            error: function (jqXHR, status, err) {
+                //alert(err);
+            }
+        });
+
+    }
+</script>
+<style type="text/css"></style>
 </head>
 <body>
 <style>
@@ -230,6 +235,7 @@
         top: 196px;
         left: 25px;
     }
+
     #upload-image {
         position: absolute;
         z-index: 100;
@@ -247,6 +253,7 @@
                     </form>
                         <input type="button" value="change-photo">
 </span>
+
 <div class="container">
 <script type="text/javascript">
     jQuery(function () {
@@ -390,7 +397,7 @@
             </div>
 
             <div class="infobar">
-                <img src="<%=cu.getPhoto()%>" alt="" width="45" id="ifbar_photo">
+                <img src="<%=cu.getPhoto()%>" alt="" width="45" height="45" id="ifbar_photo">
                 <span class="fb" id="ifbar_name"><%=username%></span>
             </div>
 
