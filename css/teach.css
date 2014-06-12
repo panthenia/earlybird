@@ -1337,7 +1337,7 @@ float: left;
 	
 }
 /*弹出的添加内容*/
-.addevents, .showevents,.showmedia{
+.addevents, .showevents{
 	padding-top: 30px;
 	padding-left: 25px;
 	display: none;
@@ -1349,6 +1349,18 @@ float: left;
 	background-color: #ebebeb;
 	z-index: 1002;
 	overflow: hidden;
+}
+.showmedia{
+    display: none;
+    position: absolute;
+    margin: 0 auto;
+    top: 30%;
+    width: 450px;
+    left: 30%;
+    height: 400px;
+    background-color: #ebebeb;
+    z-index: 1002;
+    overflow: hidden;
 }
 .showevents{
 	width: 550px;
@@ -1472,6 +1484,11 @@ float: left;
 	position: absolute;
 	left: 400px;
 	top: 5px;
+}
+.cloaeac2{
+    position: absolute;
+    left: 400px;
+    top: 5px;
 }
 .closeg{
 	position: absolute;

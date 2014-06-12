@@ -20,6 +20,7 @@ function closeshowmedia(){
     $('#show-media').hide();
     $('#fade').hide();
     $('#show-media').find('div.play-file').remove();
+    $('#show-media').find('a.play-file').remove();
 }
 var getByteLen = function (val) {
     var len = 0;
@@ -87,12 +88,14 @@ function show_week_file() {
                     ff.find('#down').attr('file-path',files[i].tpath);
                     ff.find('#down').attr('trid',files[i].id);
                     ff.find('#down').on('click',download_file);
-                    ff.find('#show').attr('file-path',files[i].tpath);
+                    ff.find('#show').attr('file-name',files[i].tname);
+                    ff.find('#show').attr('trid',files[i].id);
                     ff.find('#show').on('click', function () {
+                        var url = '/api/treasure/download.do?ol=1&id='+$(this).attr('trid');
 
-                        $('#show-media').append('<a class="play-file" href="'+$(this).attr('file-path')+'">'+$(this).attr('file-path')+'</a>');
+                        $('#show-media').append('<a class="play-file" href="'+url+'">'+$(this).attr('file-name')+'</a>');
                         $('#show-media').show();
-                        $('#show-media').find('a.play-file').media( { width: 400, height: 300, autoplay: true } );
+                        $('#show-media').find('a.play-file').media( { width:400 , height:400 ,filename: $(this).attr('file-name'), autoplay: true } );
                         $('#fade').show();
                     });
                     ff.show();

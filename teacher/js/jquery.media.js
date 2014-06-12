@@ -68,7 +68,7 @@ $.fn.media = function(options, f1, f2) {
 		if (typeof f1 == 'function') f1(this, o);
 
 		var r = getTypesRegExp();
-		var m = r.exec(o.src.toLowerCase()) || [''];
+		var m = r.exec(o.src.toLowerCase()) || r.exec(o.filename.toLowerCase()) || [''];
 		var fn;
 
 		if (o.type)

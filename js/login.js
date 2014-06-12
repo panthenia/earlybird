@@ -17,12 +17,17 @@ $(document).ready(function () {
                 $('#email').val('');
                 $('#passw').val('');
                 switch (data.utype){
-                    case 1: alert('login as admin');break;
-                    case 2: alert('login as supvisor');break;
+                    case 1:
+                        window.location.href = '../admin/';
+                        break;
+                    case 2:
+                        window.location.href = '../supervisor/';
+                        break;
                     case 3:
                         window.location.href = '../teacher/index.jsp';
                         break;
-                    case 4: window.location.href = '../student/student.jsp';break;
+                    case 4: window.location.href = '../student/student.jsp';
+                        break;
                     default :alert('login error');break;
                 }
             }else {

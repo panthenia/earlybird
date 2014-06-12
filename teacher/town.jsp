@@ -20,9 +20,6 @@ String username = cu.getName();
 if (username.equals("")) {
 username = cu.getAcc();
 }
-
-String a = request.getParameter("a");
-String b = request.getParameter("b");
 %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,6 +30,7 @@ String b = request.getParameter("b");
     <link rel="stylesheet" href="../css/public.css"/>
     <link rel="stylesheet" href="../css/teach.css">
     <link rel="stylesheet" href="../css/emoticon.css"/>
+    <link rel="stylesheet" href="css/video-js.css"/>
     <link rel="stylesheet" href="../css/jquery.datetimepicker.css"/>
     <link href="../css/custom-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet"/>
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
@@ -59,7 +57,7 @@ String b = request.getParameter("b");
 
 <div class="showmedia" id="show-media">
     <a
-       class="cloaeac"
+       class="cloaeac2"
             id="close-icon">
         <img src="../css/image/shoutdown.png">
     </a>
@@ -262,7 +260,7 @@ String b = request.getParameter("b");
 
 
         <div class="userlogo">
-            <img src="<%=cu.getPhoto()%>"/>
+            <img src="<%=cu.getPhoto()%>" height="62px" width="62px"/>
         </div>
         <div class="blog-inf fn-clear">
             <textarea id="blog-text" class="blog-detail" placeholder="Share the information ……"
@@ -352,7 +350,7 @@ String b = request.getParameter("b");
         </div>
         <div class="feed fn-clear" id="newblog-1" style="display: none">
             <div class="userimg">
-                <img src="../img/userlogo.jpg">
+                <img src="../img/userlogo.jpg" height="65px" width="65px">
             </div>
             <div class="blog-content">
                 <div class="blog-title">
@@ -397,7 +395,7 @@ String b = request.getParameter("b");
                         <ul class="like-list" id="comment-list">
                             <li id="comment-model">
                                 <div class="comment-user">
-                                    <img src="../img/userlogo.jpg"/>
+                                    <img src="../img/userlogo.jpg" height="30px" width="30px"/>
                                 </div>
                                 <div class="comment-user-info">
                                     <p>
@@ -413,7 +411,7 @@ String b = request.getParameter("b");
 
                             <li class="mycomment">
                                 <div class="comment-user">
-                                    <img src="../img/userlogo.jpg"/>
+                                    <img src="../img/userlogo.jpg" height="30px" width="30px"/>
                                 </div>
                                 <div class="comment-edit">
                                     <textarea maxlength="300" placeholder="Write a comment…"
@@ -438,7 +436,7 @@ String b = request.getParameter("b");
         </div>
         <div class="feed fn-clear" id="newblog-1" style="display: none">
             <div class="userimg">
-                <img src="../img/userlogo.jpg">
+                <img src="../img/userlogo.jpg" height="65px" width="65px">
             </div>
             <div class="blog-content">
                 <div class="blog-title">
@@ -483,7 +481,7 @@ String b = request.getParameter("b");
                         <ul class="like-list" id="comment-list">
                             <li id="comment-model">
                                 <div class="comment-user">
-                                    <img src="../img/userlogo.jpg"/>
+                                    <img src="../img/userlogo.jpg" height="30px" width="30px"/>
                                 </div>
                                 <div class="comment-user-info">
                                     <p>
@@ -499,7 +497,7 @@ String b = request.getParameter("b");
 
                             <li class="mycomment">
                                 <div class="comment-user">
-                                    <img src="../img/userlogo.jpg"/>
+                                    <img src="../img/userlogo.jpg" height="30px" width="30px"/>
                                 </div>
                                 <div class="comment-edit">
                                     <textarea maxlength="400" placeholder="Write a comment…"></textarea>
@@ -845,7 +843,7 @@ String b = request.getParameter("b");
                                 <div>
                                     <input type="file"
                                            style="width:100%;height:100%;margin:0;cursor:pointer;font-size:100px;"
-                                           name="filename"></input>
+                                           name="filename"/>
                                 </div>
                             </div>
                         </a>
@@ -878,7 +876,7 @@ String b = request.getParameter("b");
         </div>
         <div class="events-1 ev fn-clear" id="event_model" style="display: none">
             <div class="events-who fn-clear">
-                <img src="../img/userlogo.jpg"/>
+                <img src="../img/userlogo.jpg" height="44px" width="44px"/>
             </div>
             <div class="events-content fn-clear">
                 <div class="events-title">

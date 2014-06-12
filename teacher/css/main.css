@@ -769,6 +769,7 @@ i, em {
 }
 
 .infobar {
+    height: 60px;
     vertical-align: text-bottom;
 }
 
@@ -779,8 +780,9 @@ i, em {
 }
 
 .infobar .fb {
-    font-size: 18px;
-    margin-right: 20px;
+    font-size: 23px;
+    margin-right: 23px;
+    margin-top: 10px;
 }
 
 .ulA li, .unit .item {

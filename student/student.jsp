@@ -299,7 +299,7 @@ String b = request.getParameter("b");
             </div>
             <div class="feed fn-clear" id="newblog-1" style="display: none">
                 <div class="userimg">
-                    <img src="../img/userlogo.jpg">
+                    <img src="../img/userlogo.jpg" height="63px" width="63px">
                 </div>
                 <div class="blog-content">
                     <div class="blog-title">
@@ -345,7 +345,7 @@ String b = request.getParameter("b");
                             <ul class="like-list" id="comment-list">
                                 <li id="comment-model">
                                     <div class="comment-user">
-                                        <img src="../img/userlogo.jpg"/>
+                                        <img src="../img/userlogo.jpg" height="30px" width="30px"/>
                                     </div>
                                     <div class="comment-user-info">
                                         <p>
@@ -362,7 +362,7 @@ String b = request.getParameter("b");
 
                                 <li class="mycomment">
                                     <div class="comment-user">
-                                        <img src="../img/userlogo.jpg"/>
+                                        <img src="../img/userlogo.jpg" height="30px" width="30px"/>
                                     </div>
                                     <div class="comment-edit">
                                         <textarea maxlength="380" placeholder="Write a comment…"></textarea>
@@ -386,7 +386,7 @@ String b = request.getParameter("b");
             </div>
             <div class="feed fn-clear" id="newblog-1" style="display: none">
                 <div class="userimg">
-                    <img src="../img/userlogo.jpg">
+                    <img src="../img/userlogo.jpg" height="63px" width="63px">
                 </div>
                 <div class="blog-content">
                     <div class="blog-title">
@@ -432,7 +432,7 @@ String b = request.getParameter("b");
                             <ul class="like-list" id="comment-list">
                                 <li id="comment-model">
                                     <div class="comment-user">
-                                        <img src="../img/userlogo.jpg"/>
+                                        <img src="../img/userlogo.jpg" height="30px" width="30px"/>
                                     </div>
                                     <div class="comment-user-info">
                                         <p>
@@ -449,7 +449,7 @@ String b = request.getParameter("b");
 
                                 <li class="mycomment">
                                     <div class="comment-user">
-                                        <img src="../img/userlogo.jpg"/>
+                                        <img src="../img/userlogo.jpg" height="30px" width="30px"/>
                                     </div>
                                     <div class="comment-edit">
                                         <textarea maxlength="400" placeholder="Write a comment…"></textarea>
@@ -894,7 +894,7 @@ String b = request.getParameter("b");
 
         <div class="events-1 ev fn-clear" id="event_model" style="display: none">
             <div class="events-who fn-clear">
-                <img src="../img/userlogo.jpg"/>
+                <img src="../img/userlogo.jpg" height="44px" width="44px"/>
             </div>
             <div class="events-content fn-clear">
                 <div class="events-title">

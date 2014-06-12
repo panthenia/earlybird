@@ -28,6 +28,7 @@
         <link rel="stylesheet" href="css/page.css" />
         <link rel="stylesheet" href="css/atm.css"/>
         <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/public.js"></script>
         <script type="text/javascript" src="js/group.js"></script>
 	</head>
 	<body>

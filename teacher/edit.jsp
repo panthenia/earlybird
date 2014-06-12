@@ -35,11 +35,39 @@
         jQuery(function () {
             $(document).ready(function () {
                 initHtml();
+                $('#upload-image').on('change',change_photo);
             });
-            $('.account-li-last').on('click',logout);
+
+            $('.account-li-last').on('click', logout);
             $('.account-li-first').on('click', function () {
                 window.location.href = 'edit.jsp';
             });
+            function change_photo() {
+                //alert($(this).val());
+                var form = $('#photo-form');
+                if ($(this).val() == '') {
+                    return;
+                }
+
+                form.ajaxForm({
+                    url: '/api/photo/upload.do',
+                    dataType: 'json',
+                    success: function(msg, status) {
+                        var err = msg.err;
+                        if (typeof(err) == 'undefined' || err == '') {
+                            //alert(msg.img);
+                            $('#ifbar_photo').attr('src',msg.img);
+                        } else {
+                            alert(err);
+                        }
+                    },
+                    error: function (jqXHR, status, err) {
+                        alert(err);
+                    }
+                });
+
+                form.submit();
+            }
             function logout() {
                 $.ajax({
                     url: '/logout.do',
@@ -47,7 +75,7 @@
                     data: '',
                     dataType: 'json',
                     async: false,
-                    success: function(msg, status) {
+                    success: function (msg, status) {
                         var err = msg.err;
                         if (typeof(err) == 'undefined' || err == '') {
                             window.location.href = '../../login.html';
@@ -55,11 +83,12 @@
                             alert(err);
                         }
                     },
-                    error: function(jqXHR, status, err) {
+                    error: function (jqXHR, status, err) {
                         alert(err);
                     }
                 });
             }
+
             $('#btn_save').click(function () {
                 $('#if_name').val($('#if_firstname').val() + ' ' + $('#if_lastname').val());
 
@@ -80,11 +109,31 @@
 
                             alert('success!');
 
+
                         } else {
                             alert(err);
                         }
                     },
                     error: function (jqXHR, status, err) {
+                        alert(err);
+                    }
+                });
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/photo/cut.do',
+                    data: 'img='+$('#ifbar_photo').attr('src'),
+                    dataType: 'json',
+                    context: this,
+
+                    success: function(msg, status) {
+                        var err = msg.err;
+                        if (typeof(err) == 'undefined' || err == '') {
+
+                        } else {
+                            alert(err);
+                        }
+                    },
+                    error: function(jqXHR, status, err) {
                         alert(err);
                     }
                 });
@@ -173,16 +222,41 @@
     <style type="text/css"></style>
 </head>
 <body>
+<style>
+    #uploadImg {
+        font-size: 12px;
+        overflow: hidden;
+        position: absolute;
+        top: 196px;
+        left: 25px;
+    }
+    #upload-image {
+        position: absolute;
+        z-index: 100;
+        margin-left: -180px;
+        font-size: 60px;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        margin-top: -5px;
+    }
+</style>
+
+<span id="uploadImg">
+                    <form id="photo-form" method="post">
+                        <input type="file" id="upload-image" size="1" name="File">
+                    </form>
+                        <input type="button" value="change-photo">
+</span>
 <div class="container">
 <script type="text/javascript">
     jQuery(function () {
         $(document).ready(function () {
             initTopbarHtml();
         });
-        $(".account-user").click(function(){
+        $(".account-user").click(function () {
             $(".account-list").toggle(500);
         });
-        $(".account-list").mouseleave(function(){
+        $(".account-list").mouseleave(function () {
             $(this).hide();
         });
         $('#logout').click(function () {
@@ -316,7 +390,7 @@
             </div>
 
             <div class="infobar">
-                <img src="<%=cu.getPhoto()%>" alt="" width="30" id="ifbar_photo">
+                <img src="<%=cu.getPhoto()%>" alt="" width="45" id="ifbar_photo">
                 <span class="fb" id="ifbar_name"><%=username%></span>
             </div>
 
