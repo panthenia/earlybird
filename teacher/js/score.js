@@ -37,7 +37,7 @@ function logout() {
         }
     });
 }
-var se = null, m = 0, s = 1;
+var se = null, m = 0, s = 1,timer_state = 0;//0-未开始计时，1-正在计时，2-暂停
 var gnum ;
 function count_time() {
     if(m == 0 && s == 0){
@@ -55,27 +55,29 @@ function count_time() {
 
 }
 function start_count() {
-    $(this).attr("disabled", true);
 
-    if(se != null)
+    if(timer_state == 1)
         return;
-    m=$('.choose-time').find('select').val()-1;
-    s=59;
-
+    if(timer_state == 0){
+        m=$('.choose-time').find('select').val()-1;
+        s=59;
+    }
+    timer_state = 1;
     se = setInterval(count_time, 1000);
 }
 function stop_count() {
+    timer_state = 2;
     clearInterval(se);
 }
 function fresh_count() {
     clearInterval(se);
     m = s = 0;
     $('#timeshow').text("00:00");
-    $('a.start').attr("disabled", false);
+    timer_state = 0;
 }
 function init_groups() {
     $.ajax({
-        url: '/api/user/list.do?utype=4&schid=1&clzid='+$('#clzid').text(),
+        url: '/api/user/list.do?utype=4&schid='+$('#schid').text()+'&clzid='+$('#clzid').text(),
         type: 'POST',
         data: '',
         dataType: 'json',

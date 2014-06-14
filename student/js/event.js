@@ -5,6 +5,9 @@ $(document).ready(function (){
 
     init_events();//获取event列表
     $('.account-li-last').on('click',logout);
+    $('.account-li-first').on('click', function () {
+        window.location.href = "edit.jsp"
+    });
     $('a.addevent').on('click',function(){
         var event_mini = $('#event-mini');
         for(var i=10;i<60;++i){

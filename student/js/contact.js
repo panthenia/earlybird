@@ -7,10 +7,12 @@
 $(document).ready(function (){
 
     init_contacts_list();
+
     $('#contact_photo').attr('src',$('#userphoto').text());
 });
 var courses;
 var students = new Array();
+
 function get_msg(){
     var url = '/api/p2pmsg/list.do';
 
@@ -126,7 +128,9 @@ function get_students(url,data,clzid) {
 
                     sm.find('img').attr('src',users[i].photo);
                     sm.find('img').attr('style','max-width:35px');
-                    sm.find('.avater-info').text(users[i].name);
+                    sm.find('#name-a').text(users[i].nameen);
+                    sm.find('#name-b').text(users[i].name);
+
                     sm.attr('userid',users[i].id);
 
                     chat_panel = $('#chat-main-panel').clone();

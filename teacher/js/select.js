@@ -30,7 +30,7 @@ function logout() {
     });
 }
 function start_score() {
-    window.location.href = 'group.jsp'+"?crsid="+$(this).attr('crsid')+"&clzid="+$(this).attr('clzid')+"&name="+$(this).attr('clzname')+"&grade="+$(this).attr('clzgrade');
+    window.location.href = 'group.jsp'+"?crsid="+$(this).attr('crsid')+"&clzid="+$(this).attr('clzid')+"&name="+$(this).attr('clzname')+"&grade="+$(this).attr('clzgrade')+'&schid='+$('#schid').text();
 }
 function init_courses() {
     var url_to = '/api/regcourse/list.do';

@@ -58,6 +58,10 @@
     display: block;
     float: left;
 }
+.header-sign em{
+    display: block;
+    float: left;
+}
 .header-sign > div{
     position: relative;
     float: left;
@@ -70,10 +74,14 @@
     width: auto;
     color: #fff;
     vertical-align: middle;
-    margin-left: 320px;
+    margin-left: 420px;
     position: relative;
 }
 .town-header-sign a{
+    display: block;
+    float: left;
+}
+.town-header-sign em{
     display: block;
     float: left;
 }

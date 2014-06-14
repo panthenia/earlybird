@@ -147,8 +147,8 @@
 
             var url_to = '/api/user/edit.do';
 
-            var data_to = 'utype=3&id=<%=cu.getId()%>&schid=<%=cu.getSchid()%>&clzid=<%=cu.getClzid()%>&' + $(this).closest('form').serialize();
-           // alert(data_to);
+            var data_to = 'utype=4&id=<%=cu.getId()%>&schid=<%=cu.getSchid()%>&clzid=<%=cu.getClzid()%>&' + $(this).closest('form').serialize();
+            //alert(data_to);
             $.ajax({
                 url: url_to,
                 type: 'POST',
@@ -189,7 +189,7 @@
     function initTeacher() {
 
         var url_to = '/api/user/info.do';
-        var data_to = 'utype=3&id=' +<%=cu.getId()%>;
+        var data_to = 'utype=4&id=' +<%=cu.getId()%>;
 
         $.ajax({
             url: url_to,
@@ -209,37 +209,13 @@
                     $('#if_lastname').val(user.lastname);
                     $('#if_acc').val(user.acc);
                     $('#if_email').val(user.email);
-
-                    $('#if_marriage').val(user.marriage);
                     if (typeof(user.birth) != 'undefined' && user.birth != '1970-01-01') {
                         $('#if_birth').val(user.birth);
                     }
-
-                    $('#if_ppid').val(user.ppid);
-
-                    if (typeof(user.ppvalid) != 'undefined' && user.ppvalid != '1970-01-01') {
-                        $('#if_ppvalid').val(user.ppvalid);
-                    }
-
-                    $('#if_visaid').val(user.visaid);
-
-                    if (typeof(user.visavalid) != 'undefined' && user.visavalid != '1970-01-01') {
-                        $('#if_visavalid').val(user.visavalid);
-                    }
-
                     $('#if_phone').val(user.phone);
                     $('#if_parentphone').val(user.parentphone);
                     $('#if_address').val(user.address);
-
-                    $('#if_edu').val(user.edu);
-                    $('#if_degree').val(user.degree);
-                    $('#if_major').val(user.major);
-                    $('#if_edu2').val(user.edu2);
-                    $('#if_degree2').val(user.degree2);
-                    $('#if_major2').val(user.major2);
-                    $('#if_certificate').val(user.certificate);
-                    $('#if_position').val(user.position);
-                    $('#if_ranking').val(user.ranking);
+                    $('#if_parentemail').val(user.parentmail);
                 } else {
                     //alert(err);
                 }
@@ -366,13 +342,10 @@
                 <span class="header-title"><img src="css/image/headr-title.png"></span> <span><img
                     src="css/image/c-1.png"/><img src="css/image/c-2.png"/>  </span>
             </li>
-            <li class="hn-2" onclick="window.location.href='select.jsp'">Academic&nbsp;Time&nbsp;Management
-                <div class="tools" style="width:10px"><img src="css/image/tool.jpg"/></div>
-            </li>
-            <li onclick="window.location.href='town.jsp'">Teachers Town</li>
+
         </ul>
     </div>
-    <div class="town-header-sign fn-clear">
+    <div class="town-header-sign fn-clear" style="margin-left: 780px">
         <a>
             <%=username%>
         </a>
@@ -418,7 +391,7 @@
     <div class="cont">
         <form>
             <div class="titA">
-                <h2>Teachers Edit</h2>
+                <h2>Student Edit</h2>
 
                 <div class="operatebar fr">
                     <span id="btn_save"><i class="function_icon ico-save"></i>Save Profile</span>
@@ -457,92 +430,23 @@
                         <th style="width:200px;">Email Address</th>
                         <td style="width:200px;"><input id="if_email" class="inp" type="text" name="email"></td>
                     </tr>
-
-
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="row">For School HR Only</div>
-
-            <div class="form_table">
-                <table>
-                    <tbody>
                     <tr>
-                        <th style="width:200px;">Marriage</th>
-                        <td style="width:200px;">
-                            <select id="if_marriage" class="i_select" name="marriage" style="display: none;">
-                                <option value="0" selected="">Single</option>
-                                <option value="1">Married</option>
-                            </select>
-                        </td>
+                        <th style="width:200px;">Cell Phone</th>
+                        <td style="width:200px;"><input id="if_phone" class="inp" type="text" name="phone"></td>
                     </tr>
                     <tr>
                         <th style="width:200px;">Birthday</th>
                         <td style="width:200px;"><input id="if_birth" class="inp" type="text" name="birth"></td>
                     </tr>
                     <tr>
-                        <th style="width:200px;">Passport No/ID</th>
-                        <td style="width:200px;"><input id="if_ppid" class="inp" type="text" name="ppid"></td>
-                    </tr>
-                    <tr>
-                        <th style="width:200px;">Passport Valid</th>
-                        <td style="width:200px;"><input id="if_ppvalid" class="inp" type="text" name="ppvalid"></td>
-                    </tr>
-                    <tr>
-                        <th style="width:200px;">Resident Visa Number</th>
-                        <td style="width:200px;"><input id="if_visaid" class="inp" type="text" name="visaid"></td>
-                    </tr>
-                    <tr>
-                        <th style="width:200px;">Visa Valid</th>
-                        <td style="width:200px;"><input id="if_visavalid" class="inp" type="text" name="visavalid"></td>
-                    </tr>
-                    <tr>
-                        <th style="width:200px;">Cell Phone</th>
-                        <td style="width:200px;"><input id="if_phone" class="inp" type="text" name="phone"></td>
-                    </tr>
-                    <tr>
-                        <th style="width:200px;">Emergency Contact</th>
+                        <th style="width:200px;">Parent Contact</th>
                         <td style="width:200px;"><input id="if_parentphone" class="inp" type="text" name="parentphone">
                         </td>
                     </tr>
                     <tr>
-                        <th style="width:200px;">Current address</th>
-                        <td style="width:200px;"><input id="if_address" class="inp" type="text" name="address"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="form_table">
-                <table>
-                    <tbody>
-                    <tr>
-                        <th style="width:120px;">1 University</th>
-                        <td style="width:120px;"><input id="if_edu" class="inp" type="text" name="edu"></td>
-                        <th style="width:120px;">Degree</th>
-                        <td style="width:120px;"><input id="if_degree" class="inp" type="text" name="degree"></td>
-                        <th style="width:120px;">Major</th>
-                        <td style="width:120px;"><input id="if_major" class="inp" type="text" name="major"></td>
-                    </tr>
-                    <tr>
-                        <th style="width:120px;">2 University</th>
-                        <td style="width:120px;"><input id="if_edu2" class="inp" type="text" name="edu2"></td>
-                        <th style="width:120px;">Degree</th>
-                        <td style="width:120px;"><input id="if_degree2" class="inp" type="text" name="degree2"></td>
-                        <th style="width:120px;">Major</th>
-                        <td style="width:120px;"><input id="if_major2" class="inp" type="text" name="major2"></td>
-                    </tr>
-                    <tr>
-                        <th style="width:120px;">Certificate</th>
-                        <td style="width:120px;"><input id="if_certificate" class="inp" type="text" name="certificate">
+                        <th style="width:200px;">Parent Email</th>
+                        <td style="width:200px;"><input id="if_parentemail" class="inp" type="text" name="parentmail">
                         </td>
-                    </tr>
-                    <tr>
-                        <th style="width:120px;">Position</th>
-                        <td style="width:120px;"><input id="if_position" class="inp" type="text" name="position"></td>
-                        <th style="width:120px;">Ranking</th>
-                        <td style="width:120px;"><input id="if_ranking" class="inp" type="text" name="ranking"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -571,7 +475,7 @@
                 </table>
             </div>
             <div class="row pb10">
-                <strong class="toc" id="btn_cancel"><i class="function_icon ico-cancel"></i>Cancel</strong>
+                <strong class="toc" id="btn_cancel"><i class="function_icon ico-cancel"></i>Back</strong>
             </div>
         </form>
     </div>

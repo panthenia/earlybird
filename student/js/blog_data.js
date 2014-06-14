@@ -8,7 +8,7 @@ $(document).ready(function (){
     init_blogs();//获取blogs列表
 
     init_favors();
-
+    init_page_image();
     $('#search-favor-icon').on('click',search_favor);
     $('#myb-pre').on('click',myb_pre);
     $('#myb-next').on('click',myb_next);
@@ -226,6 +226,32 @@ function send_commet(){
             alert(err);
         }
     });
+}
+function init_page_image() {
+    var url_to = '/api/user/info.do';
+    var data_to = 'utype=3&id=' +$('#userid').text();
+
+    $.ajax({
+        url: url_to,
+        type: 'POST',
+        data: data_to,
+        dataType: 'json',
+        async: false,
+        success: function (msg, status) {
+            var err = msg.err;
+            if (typeof(err) == 'undefined' || err == '') {
+                var user = msg.user;
+                $('#contact_photo').attr('src',user.photo);
+                //$('.userlogo').find('img').attr('src',user.photo);
+            } else {
+                //alert(err);
+            }
+        },
+        error: function (jqXHR, status, err) {
+            //alert(err);
+        }
+    });
+
 }
 function add_favor() {
     var url ;

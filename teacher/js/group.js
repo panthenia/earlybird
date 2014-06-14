@@ -41,6 +41,7 @@ function logout() {
 function group_bypeople() {
     var clzid = $(this).attr('clzid');
     var crsid = $(this).attr('crsid');
+    var schid = $(this).attr('schid');
     var num = $('input.text_01').val();
 
     if(num.length < 1){
@@ -48,5 +49,5 @@ function group_bypeople() {
         return;
     }
 
-    window.location.href = 'score.jsp?'+'clzname='+$('#clzname').text()+'&grade='+$('#clzgrade').text()+"&crsid="+crsid+"&clzid="+clzid+"&gnum="+num;
+    window.location.href = 'score.jsp?'+'clzname='+$('#clzname').text()+'&grade='+$('#clzgrade').text()+"&crsid="+crsid+"&clzid="+clzid+"&gnum="+num+'&schid='+schid;
 }

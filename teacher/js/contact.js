@@ -5,11 +5,37 @@
 $(document).ready(function (){
 
     init_contacts_list();
-    $('#contact_photo').attr('src',$('#userphoto').text());
+    init_page_image();
+    //$('#contact_photo').attr('src',$('#userphoto').text());
 });
 var courses;
 var students = new Array();
 var is_last_course = false;
+function init_page_image() {
+    var url_to = '/api/user/info.do';
+    var data_to = 'utype=3&id=' +$('#userid').text();
+    $.ajax({
+        url: url_to,
+        type: 'POST',
+        data: data_to,
+        dataType: 'json',
+        async: false,
+        success: function (msg, status) {
+        var err = msg.err;
+        if (typeof(err) == 'undefined' || err == '') {
+        var user = msg.user;
+            $('#contact_photo').attr('src',user.photo);
+            $('.userlogo').find('img').attr('src',user.photo);
+        } else {
+            alert(err);
+        }
+        },
+        error: function (jqXHR, status, err) {
+        alert(err);
+        }
+        });
+
+    }
 function get_msg(){
     var url = '/api/p2pmsg/list.do';
 
@@ -126,7 +152,8 @@ function get_students(url,data,course_num) {
 
                     sm.find('img').attr('src',users[i].photo);
                     sm.find('img').attr('style','max-width:35px');
-                    sm.find('.avater-info').text(users[i].name);
+                    sm.find('#name-a').text(users[i].nameen);
+                    sm.find('#name-b').text(users[i].name);
                     sm.attr('userid',users[i].id);
 
                     chat_panel = $('#chat-main-panel').clone();

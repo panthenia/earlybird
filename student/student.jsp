@@ -210,9 +210,9 @@ String b = request.getParameter("b");
         </ul>
     </div>
     <div class="header-sign fn-clear">
-        <a>
+        <em>
             <%=username%>
-        </a>
+        </em>
 
         <div>
             <a class="account-user">
@@ -222,7 +222,7 @@ String b = request.getParameter("b");
             <div class="account-list">
                 <img src="../css/image/sanjx.jpg"/>
                 <ul>
-                    <li>
+                    <li class="account-li-first">
                         Profile Settings
                     </li>
                     <li class="account-li-last">
@@ -254,7 +254,7 @@ String b = request.getParameter("b");
 <div class="page-content-left-nav">
     <ul>
         <li class="li-first li-checked">
-            My&nbsp;Window
+            Teachers&nbsp;Talk
         </li>
         <li>
             Favarite
@@ -726,9 +726,8 @@ String b = request.getParameter("b");
                     <td>
                         <div>
                             <div class="avatar_wrap"><img src="../img/avater.jpg"/></div>
-                            <div
-                                    class="avater-info">usan Tao
-                            </div>
+                            <div id="name-a" class="avater-info">usan Tao</div>
+                            <div id="name-b" class="avater-info">usan Tao</div>
                         </div>
                     </td>
                 </tr>

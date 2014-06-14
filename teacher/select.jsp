@@ -60,9 +60,9 @@
         </ul>
     </div>
     <div class="town-header-sign fn-clear">
-        <a>
+        <em>
             <%=username%>
-        </a>
+        </em>
 
         <div>
             <a class="account-user">

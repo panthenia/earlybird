@@ -189,9 +189,9 @@ username = cu.getAcc();
         </ul>
     </div>
     <div class="town-header-sign fn-clear">
-        <a>
+        <em>
             <%=username%>
-        </a>
+        </em>
 
         <div>
             <a class="account-user">
@@ -257,10 +257,8 @@ username = cu.getAcc();
 <!--博客发布-->
 <div class="sent-wrap fn-clear" id="release_blog">
     <div class="blog-edit">
-
-
         <div class="userlogo">
-            <img src="<%=cu.getPhoto()%>" height="62px" width="62px"/>
+            <img height="62px" width="62px"/>
         </div>
         <div class="blog-inf fn-clear">
             <textarea id="blog-text" class="blog-detail" placeholder="Share the information ……"
@@ -779,7 +777,8 @@ username = cu.getAcc();
                     <td>
                         <div>
                             <div class="avatar_wrap"><img src="../img/avater.jpg"/></div>
-                            <div class="avater-info">usan Tao</div>
+                            <div id="name-a" class="avater-info">usan Tao</div>
+                            <div id="name-b" class="avater-info">usan Tao</div>
                         </div>
                     </td>
                 </tr>
