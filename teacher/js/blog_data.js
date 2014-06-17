@@ -335,7 +335,12 @@ function like_click(){
 function share_click(){
 
     var url = '/api/blog/share.do?id='+$(this).attr('blogid');
-    alert(url);
+    var ancestor = $(this).closest('div[blog-container]');
+    if(ancestor.attr('id') == 'blog-allpeople'){
+        url += '&clzid=0'
+    }
+
+    //alert(url);
     $.ajax({
         url: url,
         type: 'POST',
@@ -452,6 +457,31 @@ function handle_blog(url,blog_box){
 
                     divart.find('#likemuch').text(blogs[i].likes);
                     divart.find('#likemuch').attr('id','likemuch'+blogs[i].id);
+
+                    if(blogs[i].userid == $('#userid').text()){
+                        divart.find('#comment').text("delete");
+                        divart.find('#comment').attr('blog_id',blogs[i].id);
+                        divart.find('#comment').on('click', function () {
+                            $('#div_article_'+$(this).attr('blog_id')).hide();
+                            $.ajax({
+                                url: '/api/blog/delete.do?id='+$(this).attr('blog_id'),
+                                type: 'POST',
+                                data: '',
+                                dataType: 'json',
+                                async: false,
+                                success:function (msg){
+                                    if (typeof(err) == 'undefined' || err == '') {
+
+                                    }else{
+                                        alert('delete error!');
+                                    }
+                                },
+                                error: function(jqXHR, status, err) {
+                                    alert(err);
+                                }
+                            });
+                        });
+                    }
 
                     $(blog_box).prepend(divart);
 

@@ -190,7 +190,9 @@ function like_click(){
 function share_click(){
 
     var url = '/api/blog/share.do?id='+$(this).attr('blogid');
-    //alert(url);
+    if(ancestor.attr('id') == 'blog-allpeople'){
+        url += '&clzid=0'
+    }
     $.ajax({
         url: url,
         type: 'POST',

@@ -341,7 +341,7 @@ username = cu.getAcc();
 </div>
 <div class="newblog-wrap">
 
-    <div class="myBlog-wrap" id="blog-myself">
+    <div class="myBlog-wrap" id="blog-myself" blog-container="true">
         <div class="blog-pre-next">
             <a id="myb-pre" style="position:absolute;">Previous</a>
             <a id="myb-next" style="margin-left:550px">Next</a>
@@ -427,7 +427,7 @@ username = cu.getAcc();
         </div>
 
     </div>
-    <div class="allPeople" id="blog-allpeople">
+    <div class="allPeople" id="blog-allpeople" blog-container="true">
         <div class="blog-pre-next">
             <a id="apb-pre" style="position:absolute;">Previous</a>
             <a id="apb-next" style="margin-left:550px;">Next</a>
@@ -602,7 +602,7 @@ username = cu.getAcc();
                         Course Evaluation Set Up
                     </li>
                     <li>
-                        Course Content Set Up
+                        Course Content
                     </li>
                 </ul>
             </div>
