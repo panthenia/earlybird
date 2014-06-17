@@ -101,7 +101,7 @@ function init_groups() {
                     var user_list = tgrp.find('.group-list').find('ul');
                     for(var ci = (i*gnum)-gnum;ci<(i*gnum);++ci){
                         if(ci < users.length){
-                            user_list.append('<li stuid="'+users[ci].id+'">'+users[ci].name+'</li>');
+                            user_list.append('<li stuid="'+users[ci].id+'">'+users[ci].nameen+'</li>');
                         }
                     }
                     tgrp.find('.score').on('click', function () {

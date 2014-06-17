@@ -334,7 +334,7 @@ String b = request.getParameter("b");
                         <a>
                             <img id="favor-icon" src="../css/image/nosc.jpg">
                         </a>
-                        · <span class="send-ww"><em class="send-time" id="send-time">11</em>hours ago in <em
+                        · <span class="send-ww"><em class="send-time" id="send-time">11</em><em
                             class="send-where"
                             id="send-where">Treviso, Italy</em> ·</span>
                     </div>
@@ -421,7 +421,7 @@ String b = request.getParameter("b");
                         <a>
                             <img id="favor-icon" src="../css/image/nosc.jpg">
                         </a>
-                        · <span class="send-ww"><em class="send-time" id="send-time">11</em>hours ago in <em
+                        · <span class="send-ww"><em class="send-time" id="send-time">11</em><em
                             class="send-where"
                             id="send-where">Treviso, Italy</em> ·</span>
                     </div>

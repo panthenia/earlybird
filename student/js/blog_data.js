@@ -329,7 +329,7 @@ function handle_blog(url,blog_box){
                     divart.find('.blog-title').text(blogs[i].username);
                     divart.find('.blog-intro').text(blogs[i].title);
                     divart.find('.send-time').text(blogs[i].uptime);
-                    divart.find('.send-where').text(blogs[i].location);
+                    divart.find('.send-where').hide();
 
                     divart.find('#likemuch').text(blogs[i].likes);
                     divart.find('#likemuch').attr('id','likemuch'+blogs[i].id);
