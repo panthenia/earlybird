@@ -100,6 +100,11 @@
 </div>
 <div class="page-border"></div>
 <div class="content">
+    <div style="width: 100%;text-align: right;position: relative;">
+        <a href="index.jsp" style="color: #1c5480;font-size: 18px;font-weight: 600;position: absolute;left: 0;"><img src="../css/image/goback.jpg">back</a>
+        <a href="registerslist.jsp" style="color: #1c5480;font-size: 18px;font-weight: 600;position: relative;bottom: 8px;">Register</a>
+        <img src="../css/image/search.jpg">
+    </div>
     <div class="select-group" style="display: none">
         <div class="select-group-br"></div>
         <div class="select-group-list">

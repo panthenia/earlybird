@@ -360,7 +360,7 @@ username = cu.getAcc();
                 <div class="blog-photo fn-clear">
                     <ul>
                         <li class="photo-1" id="aphotoitem">
-                            <img src="../img/bg1.jpg"/>
+                            <img src="../img/bg1.jpg" style="width: 201px;height:201px;"/>
 
                         </li>
 
@@ -446,7 +446,7 @@ username = cu.getAcc();
                 <div class="blog-photo fn-clear">
                     <ul>
                         <li class="photo-1" id="aphotoitem">
-                            <img src="../img/bg1.jpg"/>
+                            <img src="../img/bg1.jpg" style="width: 201px;height: 201px;"/>
 
                         </li>
 
