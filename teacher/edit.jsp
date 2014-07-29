@@ -160,8 +160,6 @@
                     if (typeof(err) == 'undefined' || err == '') {
 
                         alert('success!');
-
-
                     } else {
                         alert(err);
                     }
@@ -462,7 +460,29 @@
                     </tbody>
                 </table>
             </div>
-
+            <div class="row">Change Password
+                <div class="operatebar fr">
+                    <span id="bt-svpsw"><i class="function_icon ico-save"></i>Save Password</span>
+                </div>
+            </div>
+            <div class="form_table">
+                <table>
+                    <tbody>
+                    <tr>
+                        <th style="width:200px;">Old Password</th>
+                        <td style="width:200px;"><input id="old-password" class="inp" type="password"></td>
+                    </tr>
+                    <tr>
+                        <th style="width:200px;">New Password</th>
+                        <td style="width:200px;"><input id="new-password" class="inp" type="password"></td>
+                    </tr>
+                    <tr>
+                        <th style="width:200px;">Confirm New Password</th>
+                        <td style="width:200px;"><input id="confirm-np" class="inp" type="password"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="row">For School HR Only</div>
 
             <div class="form_table">
@@ -547,29 +567,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row">Change Password
-                <div class="operatebar fr">
-                    <span id="bt-svpsw"><i class="function_icon ico-save"></i>Save Password</span>
-                </div>
-            </div>
-            <div class="form_table">
-                <table>
-                    <tbody>
-                    <tr>
-                        <th style="width:200px;">Old Password</th>
-                        <td style="width:200px;"><input id="old-password" class="inp" type="password"></td>
-                    </tr>
-                    <tr>
-                        <th style="width:200px;">New Password</th>
-                        <td style="width:200px;"><input id="new-password" class="inp" type="password"></td>
-                    </tr>
-                    <tr>
-                        <th style="width:200px;">Confirm New Password</th>
-                        <td style="width:200px;"><input id="confirm-np" class="inp" type="password"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+
             <div class="row pb10">
                 <strong class="toc" id="btn_cancel"><i class="function_icon ico-cancel"></i>Cancel</strong>
             </div>

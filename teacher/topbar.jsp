@@ -79,7 +79,7 @@ function initTopbarHtml() {
     <span class="option">
     <i class="topbar_icon ico-option"></i>
     <em class="option_tip">
-      <a href="">Profile Settings</a>
+      <a href="edit.jsp">Profile Settings</a>
       <a href="###" id="logout">Logout</a><i class="i_arrow"></i><i class="i_arrow_bd"></i>
     </em>
     </span>
