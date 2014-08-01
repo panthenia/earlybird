@@ -33,6 +33,7 @@ username = cu.getAcc();
     <link rel="stylesheet" href="css/video-js.css"/>
     <link rel="stylesheet" href="../css/jquery.datetimepicker.css"/>
     <link href="../css/custom-theme/jquery-ui-1.10.4.custom.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="js/uploadify/uploadify.css" />
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../js/blog.js"></script>
     <script type="text/javascript" src="../js/jquery.datetimepicker.js"></script>
@@ -41,6 +42,7 @@ username = cu.getAcc();
     <script type="text/javascript" src="js/jquery.media.js"></script>
     <script type="text/javascript" src="../js/jquery.dateSelector.js"></script>
     <script type="text/javascript" src="../js/jquery-ui-1.10.4.custom.js"></script>
+    <script type="text/javascript" src="js/uploadify/jquery.uploadify.min.js"></script>
     <script type="text/javascript" src="js/event.js"></script>
     <script type="text/javascript" src="js/blog_data.js"></script>
     <script type="text/javascript" src="js/contact.js"></script>
@@ -312,7 +314,7 @@ username = cu.getAcc();
             </ul>
         </div>
         <div class="upphoto">
-            <form id="attaform" method="post">
+            <!--<form id="attaform" method="post">
 
                 <input id="1-file-input" name="File" type="file"/>
 
@@ -323,7 +325,8 @@ username = cu.getAcc();
                     <div style="background-color: #80a060;width: 0%;height: 20px;border-radius: 3px;" id="bar"></div>
                     <div id="percent">0%</div>
                 </div>
-            </form>
+            </form>-->
+            <input type="file" name="file_upload" id="file_upload" />
             <!--<a class="shutdown"><img src="css/image/shoutdown.png"></a>
             <a class="deletephoto"><img src="css/image/delete.jpg"> </a>style="opacity:0;style="opacity:0""-->
         </div>

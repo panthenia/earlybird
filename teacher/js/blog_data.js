@@ -3,6 +3,7 @@
  */
 var class_ids = new Array();
 var blog_type = true//ture is public(whiteboard),false is class
+var files_pertime = 0;
 $(document).ready(function (){
 
 
@@ -13,7 +14,16 @@ $(document).ready(function (){
         class_ids.length = 0;
         $('#class-list').find('li[clzid]').each(select_class);
     });
-
+    $('#file_upload').uploadify({
+        'auto'     : false,
+        'swf'      : 'js/uploadify/uploadify.swf',
+        'uploader' : '',
+        'onQueueComplete' : function(queueData) {
+            alert(' files were successfully uploaded.');
+            init_blogs();
+        }
+        // Put your options here
+    });
     $('#share-group').on('click',function(){
         blog_type = false;
     });
@@ -178,7 +188,13 @@ function do_send_blog(url,data,func){
 }
 
 function addappendix(blogid) {
-    var form = $('#attaform');
+
+    //alert('start upploading!');
+    var ok = $('#file_upload');
+    ok.uploadify('settings','uploader','/api/blog/appendix/add.do?blogid='+blogid);
+    ok.uploadify('upload','*');
+
+    /*var form = $('#attaform');
     form.ajaxForm({
         url: '/api/blog/appendix/add.do?blogid='+blogid,
         dataType: 'json',
@@ -216,7 +232,7 @@ function addappendix(blogid) {
         }
     });
 
-    form.submit();
+    form.submit();*/
 }
 function send_blog(){
     var url_to = '/api/blog/add.do';
@@ -234,12 +250,13 @@ function send_blog(){
             var err = msg.err;
 
             if (typeof(err) == 'undefined' || err == '') {
-                var f1 = $('#attaform').find('#1-file-input');
-                var f2 = $('#attaform').find('#2-file-input');
+                $('#blog-text').val('');
+                //$('div.upphoto').hide();
+                $('.selectschool').hide();
+                $('.list-share-what').hide();
 
-                if(f1.val().length > 0 || f2.val().length > 0)
-                    addappendix(msg.id);
-                else  init_allpeople();
+                addappendix(msg.id);
+                //init_allpeople();
             }
         });
 
@@ -248,17 +265,22 @@ function send_blog(){
         if(class_ids.length > 0){
 
             data_to = 'clzid='+class_ids[0]+'&title='+blog_text.val();
+            if(blog_text.val().length < 1){
+                alert('please say something');
+                return;
+            }
             do_send_blog(url_to,data_to,function(msg){
                 var err = msg.err;
 
                 if (typeof(err) == 'undefined' || err == '') {
                     var bid = msg.id;
 
-                    var f1 = $('#attaform').find('#1-file-input');
-                    var f2 = $('#attaform').find('#2-file-input');
+                    $('#blog-text').val('');
+                    //$('div.upphoto').hide();
+                    $('.selectschool').hide();
+                    $('.list-share-what').hide();
 
-                    if(f1.val().length > 0 || f2.val().length > 0)
-                        addappendix(msg.id);
+                    addappendix(msg.id);
                     if(class_ids.length == 1)
                         init_blogs();
                     for(var i=1;i<class_ids.length;++i){
@@ -274,7 +296,6 @@ function send_blog(){
                                 if(cindex == class_ids.length-1){
                                     init_blogs();
                                 }
-
                             },
                             error: function(jqXHR, status, err) {
                                 alert(err);
