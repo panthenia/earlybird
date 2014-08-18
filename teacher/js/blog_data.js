@@ -280,9 +280,6 @@ function send_blog(){
                     $('.selectschool').hide();
                     $('.list-share-what').hide();
 
-                    addappendix(msg.id);
-                    if(class_ids.length == 1)
-                        init_blogs();
                     for(var i=1;i<class_ids.length;++i){
                         var url = '/api/blog/share.do?id='+bid+"&clzid="+class_ids[i];
                         var cindex = i;
@@ -294,7 +291,7 @@ function send_blog(){
                             async: false,
                             success:function (msg){
                                 if(cindex == class_ids.length-1){
-                                    init_blogs();
+                                //    init_blogs();
                                 }
                             },
                             error: function(jqXHR, status, err) {
@@ -302,7 +299,7 @@ function send_blog(){
                             }
                         });
                     }
-
+                    addappendix(msg.id);
                 }
             });
         }
