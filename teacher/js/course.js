@@ -295,10 +295,12 @@ function init_course_list(){
                         });
 
 
-                        var total = parseInt(courses[i].absenceslim)+parseInt(courses[i].tgper)
-                            +parseInt(courses[i].quizper)+parseInt(courses[i].middleper)
-                            +parseInt(courses[i].finalper);
+                        var pshi =(parseInt(courses[i].tgper)+parseInt(courses[i].quizper));
+                        var exam = (parseInt(courses[i].middleper)+parseInt(courses[i].finalper));
+                        var total = pshi+exam;
                         c_detail.find('#total').text(total);
+                        c_detail.find('#performance').text(pshi);
+                        c_detail.find('#exam').text(exam);
                         $('.courses-list-wrap').hide();
 
                         $.ajax({

@@ -615,7 +615,7 @@ username = cu.getAcc();
                         <tbody>
                         <tr>
                             <th class="a">Performance</th>
-                            <th>30%</th>
+                            <th id="performance">30%</th>
                         </tr>
                         <tr>
                             <td class="b">Absence Limit</td>
@@ -631,7 +631,7 @@ username = cu.getAcc();
                         </tr>
                         <tr>
                             <th class="a">Exam</th>
-                            <th>70%</th>
+                            <th id="exam">70%</th>
                         </tr>
                         <tr>
                             <td class="c">Middle Exam</td>
