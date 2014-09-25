@@ -81,7 +81,7 @@ function myb_next() {
     handle_blog('/api/blog/list.do?'+'start='+my_blog_start+'&num='+blog_step,'#blog-myself')
 }
 function apb_pre() {
-    if(ap_blog_start == 0){
+    if(ap_blog_sta90rt == 0){
         alert('no previous page!');
         return;
     }

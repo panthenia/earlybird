@@ -21,10 +21,11 @@
 .classname h1{
 	line-height: 35px;
 	font-size: 40px;
-	font-weight: 600;
+	font-weight: bold;
 	text-align: right;
 }
 .classname p{
+
     margin-top: 5px;
 	float: right;
 	font-size: 20px;
@@ -32,7 +33,6 @@
 .timeout{
 	width: 300px;
 	height: 200px;
-	margin-top: 53px;
 }
 .timeshow{
 	width: 240px;
@@ -44,6 +44,16 @@
 	color: #ea565f;
 	background-color: #fff;
 	float: right;
+    text-align: center;
+}
+.timeshow-timer{
+
+    font-size: 30px;
+    color: #ea565f;
+    font-weight: bold;
+    float: right;
+    margin-left: 100px;
+    display: inline-block;
 }
 .timeout p{
 	margin-top: 5px;
@@ -51,14 +61,14 @@
 	color:#ea565f;
 }
 .timeout em.min{
-	margin-left: 90px;
+	margin-left: 110px;
 }
 .timeout em.sec{
-	margin-left: 80px;
+	margin-left: 100px;
 }
 .timetool{
 	position: relative;
-	left: 20px;
+	left: 50px;
 	width: 250px;
 	height: 40px;
 	margin: 0 auto;
@@ -88,7 +98,7 @@
 }
 .group{
 	width: 750px;
-	height: 275px;
+	height: 300px;
 	margin-left: 25px;
 	position: relative;
 }
@@ -100,15 +110,19 @@
 }
 .group-child{
 	width: 680px;
-	height: 250px;
+	height: 290px;
 	margin:0 auto;
 	position: relative;
 }
 .group-child-child{
-	width: 170px;
-	height: 100%;
+	width: 190px;
+	height: 240px;
 	float: left;
-	margin-right: 50px;
+	margin-right: 10px;
+    border: 1px #B9BDC0 solid;
+    border-radius: 10px;
+    padding: 10px;
+
 }
 .group-child-child-title{
 	height: 40px;
@@ -123,7 +137,7 @@
 	line-height: 24px;
 	float: left;
 	font-size: 24px;
-	font-weight: 600;
+	font-weight: bold;
 	color: #34495e;
 }
 .score{
@@ -175,13 +189,28 @@
 }
 .group-list ul{
 	position: relative;
-	left: 20px;
+	left: 5px;
 }
 .group-list li{
-	list-style-image: url(image/listimg.jpg);
+
 	margin-bottom: 10px;
 }
-
+.group-list li img{
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+    vertical-align:middle;
+}
+.group-list li span{
+    color: #34495e;
+    width: 130px;
+    font-size: 15px;
+    display: inline-block;
+    margin-left: 5px;
+}.group-list li p{
+    color: #34495e;
+    display: inline;
+}
 
 /*选择课程*/
 .content{
