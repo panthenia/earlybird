@@ -69,7 +69,7 @@ function init_courses() {
                             c_c.find('.group-img-title').find('p').text(classes[ci].room);
                             c_c.find('.select-group-child-img').find('img').attr('src',classes[ci].logo);
                             c_c.find('.select-group-child-button').attr('clzid',classes[ci].clzid);
-                            c_c.find('.select-group-child-button').attr('crsid',classes[ci].crsid);
+                            c_c.find('.select-group-child-button').attr('crsid',classes[ci].rcid);
                             c_c.find('.select-group-child-button').attr('clzname',classes[ci].crsname);
                             c_c.find('.select-group-child-button').attr('clzgrade',classes[ci].clzname);
 
