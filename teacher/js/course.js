@@ -248,7 +248,7 @@ function init_course_list(){
                             var othis = $(this);
                             var crsid = othis.attr('crsid');
                             var dt = 'crsid='+crsid+'&week='+nwk_index+'&name='+nwk_name;
-                            alert(dt);
+                            //alert(dt);
                             if(nwk_name.length < 1){
                                 alert('input week destcription');
                                 return;

@@ -225,5 +225,5 @@ function init_contacts_list(){
 
         }
     });
-    setInterval(get_msg,5000);//start the time that fresh msg
+    setInterval(get_msg,1000*60);//start the time that fresh msg
 }

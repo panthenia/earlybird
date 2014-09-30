@@ -64,7 +64,9 @@ $(document).ready(function () {
                 if (typeof(err) == 'undefined' || err == '') {
                     if(max_score > ever_max_score){
                         ever_max_score = max_score;
+                        $('#max-score-list').remove();
                         var max_grp = c_grp.clone();
+                        max_grp.attr('id','max-score-list');
                         max_grp.css('margin-right','-40px');
 
                         max_grp.find('.group-child-child-title').css('border-bottom','1px solid #ffffff');
@@ -79,6 +81,7 @@ $(document).ready(function () {
                            $(this).append("<p> = "+max_score+"</p>");
                         });
                         $('.timeout').after(max_grp);
+
                     }
                 } else {
                     alert(err);
