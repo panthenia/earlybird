@@ -708,6 +708,10 @@ username = cu.getAcc();
                                         <img src="../css/image/eye.jpg">
                                        Show
                                     </em>
+                                    <em id="delete">
+                                        <img src="../css/image/delete.jpg">
+                                        Delete
+                                    </em>
                                 </p>
 
                             </div>

@@ -584,7 +584,7 @@
 	margin-bottom: 10px;
 }
 .wj-zhankai em{
-	margin-right: 15px;
+	margin-right: 5px;
 }
 .wj-zhankai img.wj-img-s{
 	position: relative;
@@ -594,8 +594,8 @@
 .wj-zhankai p strong{
 	display: block;
 	float: left;
-	width: 310px;
-	margin-left: 5px;
+	width: 290px;
+	margin-left: 1px;
 }
 .courser-detail-set-name .wj-img{
 	position: relative;

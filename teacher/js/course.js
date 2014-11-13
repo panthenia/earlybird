@@ -98,6 +98,35 @@ function show_week_file() {
                         $('#show-media').find('a.play-file').media( { width:400 , height:400 ,filename: $(this).attr('file-name'), autoplay: true } );
                         $('#fade').show();
                     });
+                    ff.find('#delete').attr('trid',files[i].id);
+                    ff.find('#delete').on('click', function () {
+                        var url = '/api/treasure/delete.do?id='+$(this).attr('trid');
+                        $.ajax({
+                            url: url,
+                            type: 'POST',
+                            dataType: 'json',
+                            async: false,
+                            success: function (msg, status) {
+                                var err = msg.err;
+                                if (typeof(err) == 'undefined' || err == '') {
+                                    alert('delete file successfully!');
+                                    othis.click();
+                                    othis.click();
+
+                                } else {
+                                    alert(err);
+                                }
+                            },
+                            error: function (jqXHR, status, err) {
+                                alert(err);
+                            }
+                        });
+
+                    });
+                    var current_user = $('#userid').text();
+                    if(current_user != files[i].userid){
+                        ff.find('#delete').hide();
+                    }
                     ff.show();
                     fc.append(ff);
                 }
@@ -121,7 +150,7 @@ function upload_file() {
     var othis = $(this);
     var sp = $(this).parent('#course-week-form').parent().parent().parent();
     var prg = $(this).parent('#course-week-form').parent().parent().parent().parent().parent().find('#progressbar');
-
+    var show_bt = $(this).parent('#course-week-form').parent().parent().parent().parent().parent().find('.wj-show');
     form.ajaxForm({
         url: '/api/treasure/upload.do?crsid='+$(this).attr('courseid')+'&week='+$(this).attr('weeknum'),
         dataType: 'json',
@@ -144,6 +173,8 @@ function upload_file() {
             var err = msg.err;
             if (typeof(err) == 'undefined' || err == '') {
                 alert('upload file successfully');
+                show_bt.click();
+                show_bt.click();
             } else {
                 alert(err);
             }

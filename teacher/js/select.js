@@ -66,7 +66,7 @@ function init_courses() {
                         if(ci<classes.length){
                             var c_c = class_model.clone();
                             c_c.find('.group-img-title').find('h1').text(classes[ci].crsname);
-                            c_c.find('.group-img-title').find('p').text(classes[ci].room);
+                            c_c.find('.group-img-title').find('p').text(classes[ci].clzname);
                             c_c.find('.select-group-child-img').find('img').attr('src',classes[ci].logo);
                             c_c.find('.select-group-child-button').attr('clzid',classes[ci].clzid);
                             c_c.find('.select-group-child-button').attr('crsid',classes[ci].rcid);
@@ -75,27 +75,36 @@ function init_courses() {
 
                             var c_time = new Date();
                             var chour = c_time.getHours();
-
+                            var week_num = c_time.getDay();//0-周日
+                            if(week_num == 0){//把周日转为7
+                                week_num = 7;
+                            }
                             var t_s = classes[ci].span;
-                            if(t_s < 4){
-                                t_s += 8;
-                            }else if(t_s < 8){
-                                t_s += 10;
-                            }else t_s += 11;
-                            if(t_s < chour){//设置显示成绩还是打分
-                                c_c.find('.select-group-child-button').text('SCORE');
-                                c_c.find('.select-group-child-button').css('background-color','#384755');
-                                c_c.find('.select-group-child-button').css('box-shadow','inset 0px 1px 0px #212B3A, 0px 6px 0px #212B3A');
-                                c_c.find('.select-group-child-button').on('click',show_score);
+                            var span2week = Math.floor(t_s/16)+1;
+                            if(span2week == week_num){
+                                t_s = t_s - (16*(span2week-1));
+                                //alert(t_s);
+                                if(t_s < 4){
+                                    t_s += 8;
+                                }else if(t_s < 8){
+                                    t_s += 10;
+                                }else t_s += 11;
+                                if(t_s < chour){//设置显示成绩还是打分
+                                    c_c.find('.select-group-child-button').text('SCORE');
+                                    c_c.find('.select-group-child-button').css('background-color','#384755');
+                                    c_c.find('.select-group-child-button').css('box-shadow','inset 0px 1px 0px #212B3A, 0px 6px 0px #212B3A');
+                                    c_c.find('.select-group-child-button').on('click',show_score);
 
-                            }
-                            else {
-                                c_c.find('.select-group-child-button').on('click',start_score);
-                            }
-                            // alert(classes[ci].span);
-                            c_row.append(c_c);
+                                }
+                                else {
+                                    c_c.find('.select-group-child-button').on('click',start_score);
+                                }
+                                // alert(classes[ci].span);
+                                c_row.append(c_c);
 
-                            c_c.show();
+                                c_c.show();
+                            }
+
                         }
                 }
             } else {
