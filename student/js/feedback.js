@@ -75,9 +75,8 @@ function view_feedback() {
 
                     qm.attr('id','qnum-'+qes[i].qnum);
                     qm.attr('qnum',qes[i].qnum);
-                    qm.find('.nm').text(qes[i].qnum);
                     qm.attr('index',i);
-                    qm.find('.question-edit-list-nm-name').text(qes[i].descpt);
+                    qm.find('.question-edit-list-nm-name').text(qes[i].qnum+' '+qes[i].descpt);
 
                     switch (qes[i].grade){
                         case 1:

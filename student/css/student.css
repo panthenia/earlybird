@@ -127,20 +127,22 @@ display:block;
 .question-edit-list-nm{
 	width: 565px;
 	padding-left: 10px;
-	height: 40px;
+	height: auto;
 	font-size: 14px;
 	border-top: 1px solid #ACBACA;
 	line-height: 40px;
 	position: relative;
 }
-.question-edit-list-nm em.question-edit-list-nm-name{
-	margin-left: 20px;
+.question-edit-list-nm span.question-edit-list-nm-name{
+
+    display:inline-block;
+    word-break:break-all;
 }
 .question-edit-list-nm form{
 	width: 110px;
 	position: relative;
 	left: 435px;
-	top: -40px;
+	bottom: 0;
 }
 .question-edit-list-nm form input{
 	margin-left: 18px;

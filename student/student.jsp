@@ -620,7 +620,8 @@ String b = request.getParameter("b");
     </ul>
     </div>
     <div class="question-edit-list-nm fn-clear" id="question-model">
-    <em class="nm">1</em><em class="question-edit-list-nm-name">Q3WrtingQ3WrtingQ3Wrting</em>
+
+       <span class="question-edit-list-nm-name">Q3WrtingQ3WrtingQ3Wrting</span>
     <form>
     <input type="radio"  name="look" value="1"/>
     <input type="radio"  name="look" value="2"/>
@@ -665,7 +666,8 @@ String b = request.getParameter("b");
     </ul>
     </div>
     <div class="question-edit-list-nm fn-clear" id="question-model">
-    <em class="nm">1</em><em class="question-edit-list-nm-name">Q3WrtingQ3WrtingQ3Wrting</em>
+
+        <span class="question-edit-list-nm-name">Q3WrtingQ3WrtingQ3Wrting</span>
     <form>
     <input type="radio"  name="look" value="1"/>
     <input type="radio"  name="look" value="2"/>
